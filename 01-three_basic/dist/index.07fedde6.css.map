@@ -1,0 +1,1 @@
+{"mappings":"AAAA;;;;;AAIA","sources":["src/assets/css/style.css"],"sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\nbody {\r\n  background-color: skyblue;\r\n}\r\n"],"names":[],"version":3,"file":"index.07fedde6.css.map","sourceRoot":"/__parcel_source_root/"}
