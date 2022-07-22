@@ -66,9 +66,9 @@ const clock = new THREE.Clock();
 
 // 设置动画
 var animate1 = gsap.to(cube.position, {
-  x: 5,
-  duration: 5,
-  ease: "power1.inOut",
+  x: 5, // 终点值
+  duration: 5, // 总共5s
+  ease: "power1.inOut", // 速度变化曲线
   //   设置重复的次数，无限次循环-1
   repeat: -1,
   //   往返运动
@@ -84,6 +84,7 @@ var animate1 = gsap.to(cube.position, {
 });
 gsap.to(cube.rotation, { x: 2 * Math.PI, duration: 5, ease: "power1.inOut" });
 
+// 双击暂停
 window.addEventListener("dblclick", () => {
   //   console.log(animate1);
   if (animate1.isActive()) {

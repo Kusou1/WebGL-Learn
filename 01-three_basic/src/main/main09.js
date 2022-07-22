@@ -66,6 +66,7 @@ scene.add(axesHelper);
 // 设置时钟
 const clock = new THREE.Clock();
 
+// 通过js控制画面全屏
 window.addEventListener("dblclick", () => {
   const fullScreenElement = document.fullscreenElement;
   if (!fullScreenElement) {

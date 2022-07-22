@@ -60,6 +60,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
+// 通过time处理正确的动画运动
 function render(time) {
   //   console.log(time);
   //   cube.position.x += 0.01;

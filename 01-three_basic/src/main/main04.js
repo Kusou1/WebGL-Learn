@@ -31,10 +31,10 @@ const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 // 修改物体的位置
 // cube.position.set(5, 0, 0);
 // cube.position.x = 3;
-// 缩放
+// 缩放 (x,y,z)
 // cube.scale.set(3, 2, 1);
 // cube.scale.x = 5;
-// 旋转
+// 旋转 (x,y,z,order)
 cube.rotation.set(Math.PI / 4, 0, 0, "XZY");
 
 // 将几何体添加到场景中

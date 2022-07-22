@@ -12,6 +12,11 @@ import { color } from "dat.gui";
 // 1、创建场景
 const scene = new THREE.Scene();
 
+// PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
+// fov — 摄像机视锥体垂直视野角度
+// aspect — 摄像机视锥体长宽比
+// near — 摄像机视锥体近端面
+// far — 摄像机视锥体远端面
 // 2、创建相机
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -20,13 +25,14 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-// 设置相机位置
+// 设置相机位置 (x,y,z)
 camera.position.set(0, 0, 10);
 scene.add(camera);
 
 // 添加物体
 // 创建几何体
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+// 基础网格材质
 const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 // 根据几何体和材质创建物体
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
@@ -44,13 +50,14 @@ cube.rotation.set(Math.PI / 4, 0, 0, "XZY");
 scene.add(cube);
 
 console.log(cube);
+// 图形界面修改
 const gui = new dat.GUI();
 gui
   .add(cube.position, "x")
   .min(0)
   .max(5)
   .step(0.01)
-  .name("移动x轴")
+  .name("移动x轴坐标")
   .onChange((value) => {
     console.log("值被修改：", value);
   })
@@ -72,6 +79,7 @@ gui.addColor(params, "color").onChange((value) => {
 // 设置选项框
 gui.add(cube, "visible").name("是否显示");
 
+// 添加设置控制组，折叠框，目录
 var folder = gui.addFolder("设置立方体");
 folder.add(cube.material, "wireframe");
 // 设置按钮点击触发某个事件
@@ -79,7 +87,7 @@ folder.add(params, "fn").name("立方体运动");
 
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer();
-// 设置渲染的尺寸大小
+// 设置渲染的尺寸大小  占满屏幕高度和宽度
 renderer.setSize(window.innerWidth, window.innerHeight);
 // console.log(renderer);
 // 将webgl渲染的canvas内容添加到body
@@ -88,12 +96,12 @@ document.body.appendChild(renderer.domElement);
 // // 使用渲染器，通过相机将场景渲染进来
 // renderer.render(scene, camera);
 
-// 创建轨道控制器
+// 创建轨道控制器 OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
 // 设置控制器阻尼，让控制器更有真实效果,必须在动画循环里调用.update()。
 controls.enableDamping = true;
 
-// 添加坐标轴辅助器
+// 添加坐标轴辅助器 size -- (可选的) 表示代表轴的线段长度. 默认为 1.
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 // 设置时钟
@@ -113,9 +121,9 @@ window.addEventListener("dblclick", () => {
 });
 
 function render() {
-  controls.update();
+  controls.update();// 设置控制器阻尼，必须在render中调用update
   renderer.render(scene, camera);
-  //   渲染下一帧的时候就会调用render函数
+  //   渲染下一帧的时候就会调用render函数（浏览器自带函数）
   requestAnimationFrame(render);
 }
 

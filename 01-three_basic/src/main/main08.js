@@ -106,7 +106,7 @@ function render() {
 
 render();
 
-// 监听画面变化，更新渲染画面
+// 监听画面变化，resize更新渲染画面,实现自适应画面
 window.addEventListener("resize", () => {
   //   console.log("画面变化了");
   // 更新摄像头
