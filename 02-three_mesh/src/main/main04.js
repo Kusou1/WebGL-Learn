@@ -42,6 +42,9 @@ const texture = textureLoader.load("./textures/minecraft.png");
 // 设置纹理的重复
 // doorColorTexture.repeat.set(2, 3);
 // // 设置纹理重复的模式
+// 这个值定义了纹理贴图在水平方向上将如何包裹，在UV映射中对应于U。
+// 默认值是THREE.ClampToEdgeWrapping，即纹理边缘将被推到外部边缘的纹素。 
+// 其它的两个选项分别是THREE.RepeatWrapping和THREE.MirroredRepeatWrapping。
 // doorColorTexture.wrapS = THREE.MirroredRepeatWrapping;
 // doorColorTexture.wrapT = THREE.RepeatWrapping;
 

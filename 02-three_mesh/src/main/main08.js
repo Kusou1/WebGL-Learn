@@ -34,6 +34,12 @@ const doorAoTexture = textureLoader.load(
 // 添加物体
 const cubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
 // 材质
+// .aoMap : Texture
+// 该纹理的红色通道用作环境遮挡贴图。默认值为null。aoMap需要第二组UV。
+
+// .aoMapIntensity : Float
+// 环境遮挡效果的强度。默认值为1。零是不遮挡效果。
+
 const basicMaterial = new THREE.MeshBasicMaterial({
   color: "#ffff00",
   map: doorColorTexture,

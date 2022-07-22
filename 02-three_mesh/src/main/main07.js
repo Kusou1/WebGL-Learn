@@ -31,15 +31,18 @@ const doorAplhaTexture = textureLoader.load("./textures/door/alpha.jpg");
 // 添加物体
 const cubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
 // 材质
+// alphaMap 
+// alpha贴图是一张灰度纹理，用于控制整个表面的不透明度。（黑色：完全透明；白色：完全不透明）。 默认值为null。
+// 仅使用纹理的颜色，忽略alpha通道（如果存在）。 对于RGB和RGBA纹理，WebGL渲染器在采样此纹理时将使用绿色通道， 因为在DXT压缩和未压缩RGB 565格式中为绿色提供了额外的精度。 Luminance-only以及luminance/alpha纹理也仍然有效。
 const basicMaterial = new THREE.MeshBasicMaterial({
   color: "#ffff00",
   map: doorColorTexture,
-  //   alphaMap: doorAplhaTexture,
+    alphaMap: doorAplhaTexture,
   transparent: true,
-  opacity: 0.3,
+  // opacity: 0.3,
   //   side: THREE.DoubleSide,
 });
-basicMaterial.side = THREE.DoubleSide;
+basicMaterial.side = THREE.DoubleSide; // 渲染两面
 const cube = new THREE.Mesh(cubeGeometry, basicMaterial);
 scene.add(cube);
 

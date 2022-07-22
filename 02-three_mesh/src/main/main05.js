@@ -46,10 +46,19 @@ const texture = textureLoader.load("./textures/minecraft.png");
 // doorColorTexture.wrapT = THREE.RepeatWrapping;
 
 // texture纹理显示设置
-// texture.minFilter = THREE.NearestFilter;
-// texture.magFilter = THREE.NearestFilter;
-texture.minFilter = THREE.LinearFilter;
-texture.magFilter = THREE.LinearFilter;
+// .minFilter : number
+// 当一个纹素覆盖小于一个像素时，贴图将如何采样。默认值为THREE.LinearMipmapLinearFilter， 
+// 它将使用mipmapping以及三次线性滤镜。
+// .magFilter : number
+// 当一个纹素覆盖大于一个像素时，贴图将如何采样。默认值为THREE.LinearFilter， 
+// 它将获取四个最接近的纹素，并在他们之间进行双线性插值。 另一个选项是THREE.NearestFilter，它将使用最接近的纹素的值。
+// 请参阅texture constants页面来了解详细信息。
+texture.minFilter = THREE.NearestFilter;
+texture.magFilter = THREE.NearestFilter;
+// texture.minFilter = THREE.LinearFilter;
+// texture.magFilter = THREE.LinearFilter;
+// THREE.NearestFilter的话看上去更清晰
+
 
 // 添加物体
 const cubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1);

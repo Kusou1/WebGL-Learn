@@ -36,6 +36,7 @@ const doorHeightTexture = textureLoader.load("./textures/door/height.jpg");
 // 添加物体
 const cubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1, 100, 100, 100);
 // 材质
+// 标准网格材质 必须要有光
 const material = new THREE.MeshStandardMaterial({
   color: "#ffff00",
   map: doorColorTexture,
@@ -43,7 +44,7 @@ const material = new THREE.MeshStandardMaterial({
   transparent: true,
   aoMap: doorAoTexture,
   aoMapIntensity: 1,
-  displacementMap: doorHeightTexture,
+  displacementMap: doorHeightTexture, // 高度差贴图
   displacementScale: 0.1,
   //   opacity: 0.3,
   //   side: THREE.DoubleSide,
@@ -71,7 +72,7 @@ planeGeometry.setAttribute(
 );
 
 // 灯光
-// 环境光
+// 环境光 颜色，灯光强度
 const light = new THREE.AmbientLight(0xffffff, 0.5); // soft white light
 scene.add(light);
 //直线光源

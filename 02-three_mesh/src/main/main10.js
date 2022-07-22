@@ -6,8 +6,8 @@ import gsap from "gsap";
 // 导入dat.gui
 import * as dat from "dat.gui";
 
-// 目标：粗糙度与粗糙度贴图/金属贴图、法线贴图
-
+// 目标：粗糙度与粗糙度贴图/金属贴图、法线贴图 
+// displacementMap
 // 1、创建场景
 const scene = new THREE.Scene();
 
@@ -42,6 +42,33 @@ const normalTexture = textureLoader.load("./textures/door/normal.jpg");
 // 添加物体
 const cubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1, 100, 100, 100);
 // 材质
+
+// .displacementMap : Texture
+// 位移贴图会影响网格顶点的位置，与仅影响材质的光照和阴影的其他贴图不同，
+// 移位的顶点可以投射阴影，阻挡其他对象， 以及充当真实的几何体。
+// 位移纹理是指：网格的所有顶点被映射为图像中每个像素的值（白色是最高的），并且被重定位。
+// .roughness : Float
+// 材质的粗糙程度。0.0表示平滑的镜面反射，1.0表示完全漫反射。默认值为1.0。如果还提供roughnessMap，则两个值相乘。
+
+// .roughnessMap : Texture
+// 该纹理的绿色通道用于改变材质的粗糙度。
+
+// .metalness : Float
+// 材质与金属的相似度。非金属材质，如木材或石材，使用0.0，金属使用1.0，通常没有中间值。 默认值为0.0。0.0到1.0之间的值可用于生锈金属的外观。如果还提供了metalnessMap，则两个值相乘。
+
+// .metalnessMap : Texture
+// 该纹理的蓝色通道用于改变材质的金属度。
+
+// .normalMap : Texture
+// 用于创建法线贴图的纹理。RGB值会影响每个像素片段的曲面法线，并更改颜色照亮的方式。法线贴图不会改变曲面的实际形状，只会改变光照。 In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
+
+// .normalMapType : Integer
+// 法线贴图的类型。
+
+// 选项为THREE.TangentSpaceNormalMap（默认）和THREE.ObjectSpaceNormalMap。
+
+// .normalScale : Vector2
+// 法线贴图对材质的影响程度。典型范围是0-1。默认值是Vector2设置为（1,1）。
 const material = new THREE.MeshStandardMaterial({
   color: "#ffff00",
   map: doorColorTexture,
@@ -49,13 +76,13 @@ const material = new THREE.MeshStandardMaterial({
   transparent: true,
   aoMap: doorAoTexture,
   aoMapIntensity: 1,
-  displacementMap: doorHeightTexture,
-  displacementScale: 0.1,
-  roughness: 1,
-  roughnessMap: roughnessTexture,
-  metalness: 1,
-  metalnessMap: metalnessTexture,
-  normalMap: normalTexture,
+  displacementMap: doorHeightTexture, // 置换贴图
+  displacementScale: 0.1, // 置换影响程度
+  roughness: 1, // 粗糙度
+  roughnessMap: roughnessTexture, // 粗糙度贴图
+  metalness: 1, // 金属度
+  metalnessMap: metalnessTexture, // 金属贴图
+  normalMap: normalTexture, // 法线贴图
   //   opacity: 0.3,
   //   side: THREE.DoubleSide,
 });

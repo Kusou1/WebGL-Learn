@@ -6,7 +6,7 @@ import gsap from "gsap";
 // 导入dat.gui
 import * as dat from "dat.gui";
 
-// 目标：纹理的进度
+// 目标：纹理的进度 onProgress onError onLoad
 
 // 1、创建场景
 const scene = new THREE.Scene();
@@ -32,7 +32,7 @@ div.style.top = 0;
 div.style.color = "#fff";
 document.body.appendChild(div);
 let event = {};
-// 单张纹理图的加载
+// 单张纹理图的加载进度
 event.onLoad = function () {
   console.log("图片加载完成");
 };

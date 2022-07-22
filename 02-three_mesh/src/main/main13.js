@@ -7,7 +7,7 @@ import gsap from "gsap";
 import * as dat from "dat.gui";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 // 目标：设置环境纹理
-// 加载hdr环境图
+// 加载hdr环境图 使用RGBELoader加载
 const rgbeLoader = new RGBELoader();
 rgbeLoader.loadAsync("textures/hdr/002.hdr").then((texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping;

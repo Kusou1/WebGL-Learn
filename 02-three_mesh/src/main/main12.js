@@ -8,12 +8,12 @@ import * as dat from "dat.gui";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 // 目标：设置环境纹理
 // 加载hdr环境图
-const rgbeLoader = new RGBELoader();
-rgbeLoader.loadAsync("textures/hdr/002.hdr").then((texture) => {
-  texture.mapping = THREE.EquirectangularReflectionMapping;
-  scene.background = texture;
-  scene.environment = texture;
-});
+// const rgbeLoader = new RGBELoader();
+// rgbeLoader.loadAsync("textures/hdr/002.hdr").then((texture) => {
+//   texture.mapping = THREE.EquirectangularReflectionMapping;
+//   scene.background = texture;
+//   scene.environment = texture;
+// });
 
 // 1、创建场景
 const scene = new THREE.Scene();
@@ -41,10 +41,11 @@ const envMapTexture = cubeTextureLoader.load([
   "textures/environmentMaps/1/nz.jpg",
 ]);
 
+// 加载小球
 const sphereGeometry = new THREE.SphereBufferGeometry(1, 20, 20);
 const material = new THREE.MeshStandardMaterial({
-  metalness: 0.7,
-  roughness: 0.1,
+  metalness: 0.7, // 金属材质
+  roughness: 0.1, // 光滑度
   //   envMap: envMapTexture,
 });
 const sphere = new THREE.Mesh(sphereGeometry, material);
