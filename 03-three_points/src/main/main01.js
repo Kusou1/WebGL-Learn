@@ -33,10 +33,10 @@ const sphereGeometry = new THREE.SphereBufferGeometry(3, 30, 30);
 // const mesh = new THREE.Mesh(sphereGeometry, material);
 // scene.add(mesh);
 
-// 设置点材质
+// 设置点材质  用点去构成圆物体
 const pointsMaterial = new THREE.PointsMaterial();
-pointsMaterial.size = 0.1;
-pointsMaterial.color.set(0xfff000);
+pointsMaterial.size = 0.1; // 设置点材质的大小，默认1
+pointsMaterial.color.set(0xfff000); // 设置点材质颜色，默认为白色
 // 相机深度而衰减
 pointsMaterial.sizeAttenuation = true;
 

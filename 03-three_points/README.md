@@ -1,10 +1,13 @@
-threejs base
+threejs Point 精通粒子特效
 
 yarn && yarn dev
 
+
+[点（Points）](https://threejs.org/docs/?q=Point#api/zh/objects/Points)
+
 | File   | Target                                      |
 | ------ | ------------------------------------------- |
-| main01 | 了解three.js最基本的内容                    |
+| main01 | [认识pointes](https://threejs.org/docs/?q=Point#api/zh/objects/Points)                   |
 | main02 | 使用控制器查看3d物体                        |
 | main03 | 控制3d物体移动                              |
 | main04 | 控制3d物体缩放                              |
