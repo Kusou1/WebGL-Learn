@@ -5,7 +5,8 @@ Graph is Awesome!
 - [three.js_mesh 材质，纹理与灯光](./02-three_mesh_texture_light/README.md)
 - [three.js_mesh 材质，纹理与灯光](./03-three_point/README.md)
 - [three.js_raycaster raycaster光线投射与物体交互](./04-three_raycaster/README.md)
-- [three.js_full_scroll 3D全频滚动官网](./05-05-three_full_scroll/README.md/README.md)
+- [three.js_full_scroll 3D全频滚动官网](./05-05-three_full_scroll/README.md)
+- [three.js_physics 应用物理引擎设置物体相互作用](./05-05-three_physics/README.md)
   
   
 ![three_1](./assets/three_js/three_1.jpg?raw=true)
