@@ -30,7 +30,7 @@ const params = {
   count: 10000,
   size: 0.1,
   radius: 5,
-  branch: 3,
+  branch: 4,
   color: "#ff6030",
   rotateScale: 0.3,
   endColor: "#1b3984",
@@ -79,6 +79,12 @@ const generateGalaxy = () => {
 
     // 混合颜色，形成渐变色
     const mixColor = centerColor.clone();
+    // 线性插值
+    // .lerp ( color : Color, alpha : Float ) : this
+    // color - 用于收敛的颜色。
+    // alpha - 介于0到1的数字。
+    // 将该颜色的RGB值线性插值到传入参数的RGB值。
+    // alpha参数可以被认为是两种颜色之间的比例值，其中0是当前颜色和1.0是第一个参数的颜色。
     mixColor.lerp(endColor, distance / params.radius);
 
     colors[current] = mixColor.r;
@@ -135,7 +141,7 @@ const clock = new THREE.Clock();
 
 function render() {
   let time = clock.getElapsedTime();
-
+  points.rotation.y = time * 0.1;
   controls.update();
   renderer.render(scene, camera);
   //   渲染下一帧的时候就会调用render函数

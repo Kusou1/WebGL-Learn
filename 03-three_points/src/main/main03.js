@@ -17,13 +17,14 @@ const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
-  30
+  30 // 设置摄像机裁截，超过30就看不见
 );
 
 // 设置相机位置
 camera.position.set(0, 0, 40);
 scene.add(camera);
 
+// 封装创建物体函数
 function createPoints(url, size = 0.5) {
   const particlesGeometry = new THREE.BufferGeometry();
   const count = 10000;
@@ -68,8 +69,11 @@ function createPoints(url, size = 0.5) {
   return points;
 }
 
+// 第一种雪花
 const points = createPoints("1", 1.5);
+// 第二种雪花
 const points2 = createPoints("xh", 1);
+// 第三种雪花
 const points3 = createPoints("xh", 2);
 
 // 初始化渲染器
