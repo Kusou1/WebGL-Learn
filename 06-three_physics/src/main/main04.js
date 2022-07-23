@@ -50,8 +50,9 @@ function createCube() {
     //   物体材质
     material: cubeWorldMaterial,
   });
+  // 给cubeBody添加一个除重力之外的力，接收两个变量
   cubeBody.applyLocalForce(
-    new CANNON.Vec3(300, 0, 0), //添加的力的大小和方向
+    new CANNON.Vec3(-500, 300, 5000), //添加的力的大小和方向
     new CANNON.Vec3(0, 0, 0) //施加的力所在的位置
   );
 
@@ -66,7 +67,7 @@ function createCube() {
     if (impactStrength > 2) {
       //   重新从零开始播放
       hitSound.currentTime = 0;
-      hitSound.volume = impactStrength / 12;
+      hitSound.volume = impactStrength / 100; // 通过碰撞强弱设置声音
       hitSound.play();
     }
   }

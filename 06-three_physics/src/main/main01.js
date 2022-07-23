@@ -47,11 +47,11 @@ scene.add(floor);
 // 创建物理世界
 // const world = new CANNON.World({ gravity: 9.8 });
 const world = new CANNON.World();
-world.gravity.set(0, -9.8, 0);
+world.gravity.set(0, -9.8, 0); // 作用力
 // 创建物理小球形状
 const sphereShape = new CANNON.Sphere(1);
 
-//设置物体材质
+// 设置物体材质
 const sphereWorldMaterial = new CANNON.Material();
 
 // 创建物理世界的物体
@@ -104,8 +104,11 @@ function render() {
   //   let time = clock.getElapsedTime();
   let deltaTime = clock.getDelta();
   // 更新物理引擎里世界的物体
+  // 要使用的固定时间步长。
+  // timeSinceLastCalled自从上次调用所经过的时间
   world.step(1 / 120, deltaTime);
 
+  // 渲染的小球绑定物理世界的小球
   sphere.position.copy(sphereBody.position);
 
   renderer.render(scene, camera);

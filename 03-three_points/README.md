@@ -17,7 +17,7 @@ alpha - 介于0到1的数字。
 
 | File   | Target                                      |
 | ------ | ------------------------------------------- |
-| main01 | [认识pointes](https://threejs.org/docs/?q=Point#api/zh/objects/Points)                   |
-| main02 | 使用pointes设置随机顶点打造星河                      |
-| main03 | 设置漫天的雪花        |
-| main04 | 运用数学知识设计特定形状的星系          |
+| src/main/main01 | [认识pointes](https://threejs.org/docs/?q=Point#api/zh/objects/Points)                   |
+| src/main/main02 | 使用pointes设置随机顶点打造星河                      |
+| src/main/main03 | 设置漫天的雪花        |
+| src/main/main04 | 运用数学知识设计特定形状的星系          |

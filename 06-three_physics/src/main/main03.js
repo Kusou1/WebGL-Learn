@@ -8,7 +8,7 @@ import * as dat from "dat.gui";
 // 导入connon引擎
 import * as CANNON from "cannon-es";
 
-// 目标：使用cannon引擎
+// 目标：监听碰撞事件
 console.log(CANNON);
 
 // const gui = new dat.GUI();
@@ -72,12 +72,13 @@ const hitSound = new Audio("assets/metalHit.mp3");
 // 添加监听碰撞事件
 function HitEvent(e) {
   // 获取碰撞的强度
-  //   console.log("hit", e);
+    console.log("hit", e);
   const impactStrength = e.contact.getImpactVelocityAlongNormal();
-  console.log(impactStrength);
+  console.log(impactStrength); //获取碰撞强弱程度
   if (impactStrength > 2) {
     //   重新从零开始播放
     hitSound.currentTime = 0;
+    hitSound.volume=impactStrength/100 // 通过碰撞强度设置音量大小
     hitSound.play();
   }
 }
@@ -86,7 +87,7 @@ sphereBody.addEventListener("collide", HitEvent);
 // 物理世界创建地面
 const floorShape = new CANNON.Plane();
 const floorBody = new CANNON.Body();
-const floorMaterial = new CANNON.Material("floor");
+const floorMaterial = new CANNON.Material("floor"); // 为地面设置材质
 floorBody.material = floorMaterial;
 // 当质量为0的时候，可以使得物体保持不动
 floorBody.mass = 0;
@@ -109,7 +110,7 @@ const defaultContactMaterial = new CANNON.ContactMaterial(
   }
 );
 
-// 讲材料的关联设置添加的物理世界
+// 将材料的关联设置添加的物理世界
 world.addContactMaterial(defaultContactMaterial);
 
 //添加环境光和平行光

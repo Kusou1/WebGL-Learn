@@ -59,23 +59,23 @@ mesh 全面认识three.js几何体与材质
 
 | File   | Target                                      |
 | ------ | ------------------------------------------- |
-| main01 | (BufferGeometry)[https://threejs.org/docs/?q=BufferGeometry#api/zh/core/BufferGeometry]                 |
-| main02 | 打造酷炫的三角形                        |
-| main03 | [基础材质与纹理](https://threejs.org/docs/#api/zh/materials/MeshBasicMaterial)                           |
-| main04 | 纹理常用属性                              |
-| main05 | 纹理显示的算法与mipmap |
-| main06 | 纹理显示的算法与mipmap                    |
-| main07 | 透明纹理 alphaMap                    |
-| main08 | AO环境遮挡贴图              |
-| main09 | [标准网格材质(MeshStandardMaterial) ](https://threejs.org/docs/?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial) （基于PBR）                          |
-| main10   | 粗糙度与粗糙度贴图/金属贴图、法线贴图               |
-| main11   | 纹理加载的进度              |
-| main12   | 设置环境纹理 [CubeTextureLoader](https://threejs.org/docs/?q=CubeTextureLoader#api/zh/loaders/CubeTextureLoader)   |
-| main13   | 加载hdr环境图 [RGBELoader](https://threejs.org/docs/?q=DataTexture#api/zh/loaders/DataTextureLoader)|
-| main14   | 灯光与阴影的关系与设置  |
-| main15   | [阴影的属性与投影相机原理](https://threejs.org/docs/#api/zh/lights/shadows/DirectionalLightShadow)  |
-| main16   | [聚光灯（SpotLight）](https://threejs.org/docs/?q=spot#api/zh/lights/SpotLight)  |
-| main16   | [点光源（PointLight）](https://threejs.org/docs/#api/zh/lights/PointLight)  |
+| src/main/main01 | (BufferGeometry)[https://threejs.org/docs/?q=BufferGeometry#api/zh/core/BufferGeometry]                 |
+| src/main/main02 | 打造酷炫的三角形                        |
+| src/main/main03 | [基础材质与纹理](https://threejs.org/docs/#api/zh/materials/MeshBasicMaterial)                           |
+| src/main/main04 | 纹理常用属性                              |
+| src/main/main05 | 纹理显示的算法与mipmap |
+| src/main/main06 | 纹理显示的算法与mipmap                    |
+| src/main/main07 | 透明纹理 alphaMap                    |
+| src/main/main08 | AO环境遮挡贴图              |
+| src/main/main09 | [标准网格材质(MeshStandardMaterial) ](https://threejs.org/docs/?q=MeshStandardMaterial#api/zh/materials/MeshStandardMaterial) （基于PBR）                          |
+| src/main/main10   | 粗糙度与粗糙度贴图/金属贴图、法线贴图               |
+| src/main/main11   | 纹理加载的进度              |
+| src/main/main12   | 设置环境纹理 [CubeTextureLoader](https://threejs.org/docs/?q=CubeTextureLoader#api/zh/loaders/CubeTextureLoader)   |
+| src/main/main13   | 加载hdr环境图 [RGBELoader](https://threejs.org/docs/?q=DataTexture#api/zh/loaders/DataTextureLoader)|
+| src/main/main14   | 灯光与阴影的关系与设置  |
+| src/main/main15   | [阴影的属性与投影相机原理](https://threejs.org/docs/#api/zh/lights/shadows/DirectionalLightShadow)  |
+| src/main/main16   | [聚光灯（SpotLight）](https://threejs.org/docs/?q=spot#api/zh/lights/SpotLight)  |
+| src/main/main17   | [点光源（PointLight）](https://threejs.org/docs/#api/zh/lights/PointLight)  |
 
 
 

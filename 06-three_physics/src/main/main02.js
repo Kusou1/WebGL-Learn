@@ -36,7 +36,7 @@ scene.add(sphere);
 
 const floor = new THREE.Mesh(
   new THREE.PlaneBufferGeometry(20, 20),
-  new THREE.MeshStandardMaterial()
+  new THREE.MeshStandardMaterial({side:THREE.DoubleSide}) // 渲染两面
 );
 
 floor.position.set(0, -5, 0);
@@ -68,15 +68,15 @@ const sphereBody = new CANNON.Body({
 world.addBody(sphereBody);
 
 // 物理世界创建地面
-const floorShape = new CANNON.Plane();
-const floorBody = new CANNON.Body();
+const floorShape = new CANNON.Plane(); // 形状
+const floorBody = new CANNON.Body(); // 地面的Body
 // 当质量为0的时候，可以使得物体保持不动
 floorBody.mass = 0;
 floorBody.addShape(floorShape);
 // 地面位置
 floorBody.position.set(0, -5, 0);
 // 旋转地面的位置
-floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2); // 按x轴旋转，默认是一个xy的平面
 world.addBody(floorBody);
 
 //添加环境光和平行光
