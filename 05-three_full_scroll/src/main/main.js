@@ -50,7 +50,7 @@ for (let i = 0; i < 5; i++) {
 
 scene.add(cubeGroup);
 
-// 创建三角形酷炫物体
+// 创建三角形
 // 添加物体
 // 创建几何体
 var sjxGroup = new THREE.Group();
@@ -79,8 +79,10 @@ for (let i = 0; i < 50; i++) {
   // 根据几何体和材质创建物体
   let sjxMesh = new THREE.Mesh(geometry, material);
   //   console.log(mesh);
+  // 将物体都添加到三角形组中
   sjxGroup.add(sjxMesh);
 }
+// 设置组的偏移
 sjxGroup.position.set(0, -30, 0);
 scene.add(sjxGroup);
 
@@ -129,6 +131,7 @@ pointLight.shadow.mapSize.set(512, 512);
 smallBall.add(pointLight);
 sphereGroup.add(smallBall);
 
+// 点光源组
 sphereGroup.position.set(0, -60, 0);
 scene.add(sphereGroup);
 
@@ -161,7 +164,7 @@ window.addEventListener("click", (event) => {
 });
 
 // 初始化渲染器
-// 渲染器透明
+// 设置渲染器透明
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 // 设置渲染的尺寸大小
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -231,9 +234,10 @@ function render() {
   //   sphereGroup.rotation.z = Math.sin(time) * 0.05;
   //   sphereGroup.rotation.x = Math.sin(time) * 0.05;
 
-  //   根据当前滚动的scrolly，去设置相机移动的位置
+  //   根据当前滚动的scrollY，去设置相机移动的位置
   camera.position.y = -(window.scrollY / window.innerHeight) * 30;
 
+  //   鼠标控制相机位置    通过鼠标值 - 相机现在的位置 乘以时间差
   camera.position.x += (mouse.x * 10 - camera.position.x) * deltaTime * 5;
   //   controls.update();
   renderer.render(scene, camera);
@@ -247,7 +251,7 @@ render();
 window.addEventListener("resize", () => {
   //   console.log("画面变化了");
 
-  // 更新摄像头
+  // 更新摄像头 
   camera.aspect = window.innerWidth / window.innerHeight;
   //   更新摄像机的投影矩阵
   camera.updateProjectionMatrix();
@@ -269,8 +273,8 @@ window.addEventListener("scroll", () => {
     console.log("改变页面，当前是：" + currentPage);
     console.log(arrGroup[currentPage].rotation);
     gsap.to(arrGroup[currentPage].rotation, {
-      z: "+=" + Math.PI * 2,
-      x: "+=" + Math.PI * 2,
+      // z: "+=" + Math.PI * 2,
+      // x: "+=" + Math.PI * 2,
       duration: 2,
       onComplete: () => {
         console.log("旋转完成");
