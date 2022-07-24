@@ -41,9 +41,11 @@ scene.add(camera);
 
 // 创建纹理加载器对象
 const rgbeLoader = new RGBELoader();
+// 加载背景
 rgbeLoader.loadAsync("./assets/2k.hdr").then((texture) => {
+  // 环境的映射
   texture.mapping = THREE.EquirectangularReflectionMapping;
-  scene.background = texture;
+  scene.background = texture; // 将环境设置成这张图片
   scene.environment = texture;
 });
 
@@ -61,13 +63,24 @@ const renderer = new THREE.WebGLRenderer({ alpha: true });
 // renderer.shadowMap.enabled = true;
 // renderer.shadowMap.type = THREE.BasicShadowMap;
 // renderer.shadowMap.type = THREE.VSMShadowMap;
-renderer.outputEncoding = THREE.sRGBEncoding;
+
+// 定义渲染器的输出编码。默认为THREE.LinearEncoding
+// 如果渲染目标已经使用 .setRenderTarget、之后将直接使用renderTarget.texture.encoding
+// 详见色彩空间.md
+renderer.outputEncoding = THREE.sRGBEncoding; // 设置成RGB编码
+// 色调映射
+// ACESFilmicToneMapping最常用的，保留更多的细节，电影级别
+// 这些常量定义了WebGLRenderer中toneMapping的属性。 
+// 这个属性用于在普通计算机显示器或者移动设备屏幕等低动态范围介质上，模拟、逼近高动态范围（HDR）效果。
+// 对性能影响不大
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 // renderer.toneMapping = THREE.LinearToneMapping;
 // renderer.toneMapping = THREE.ReinhardToneMapping;
 // renderer.toneMapping = THREE.CineonToneMapping;
+// 设置曝光程度
 renderer.toneMappingExposure = 0.2;
 
+// 加载GLTF
 const gltfLoader = new GLTFLoader();
 let LightBox = null;
 gltfLoader.load("./assets/model/flyLight.glb", (gltf) => {
@@ -78,15 +91,18 @@ gltfLoader.load("./assets/model/flyLight.glb", (gltf) => {
 
   for (let i = 0; i < 150; i++) {
     let flyLight = gltf.scene.clone(true);
+    // 获取随机的坐标
     let x = (Math.random() - 0.5) * 300;
     let z = (Math.random() - 0.5) * 300;
     let y = Math.random() * 60 + 25;
     flyLight.position.set(x, y, z);
+    // 旋转
     gsap.to(flyLight.rotation, {
       y: 2 * Math.PI,
       duration: 10 + Math.random() * 30,
       repeat: -1,
     });
+    // 上下漂浮
     gsap.to(flyLight.position, {
       x: "+=" + Math.random() * 5,
       y: "+=" + Math.random() * 20,
@@ -122,9 +138,12 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 // 设置控制器阻尼
 controls.enableDamping = true;
-// 设置自动旋转
+// 设置控制器自动旋转
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.1;
+// 旋转速度
+controls.autoRotateSpeed = 0.5;
+// 设置最大及最小旋转角度
+// 你能够垂直旋转的角度的下限，范围是0到Math.PI，其默认值为0。
 controls.maxPolarAngle = (Math.PI / 3) * 2;
 controls.minPolarAngle = (Math.PI / 3) * 2;
 
