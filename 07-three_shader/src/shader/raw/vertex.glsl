@@ -41,6 +41,7 @@ varying float vElevation;
 
 void main(){
     vUv = uv;
+    // <投影矩阵> * <视图矩阵> * <模型矩阵> * <顶点坐标>
     vec4 modelPosition = modelMatrix * vec4( position, 1.0 );
     // modelPosition.x += 1.0;
     // modelPosition.z += 1.0;

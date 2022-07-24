@@ -7,6 +7,8 @@ varying vec2 vUv;
 precision lowp float;
 void main(){
     vec4 modelPosition = modelMatrix * vec4( position, 1.0 );
+    // uv自动是会获取到的，相当于属性，position也是会自己获取到
+    // 表示当前自己的二维向量，传给片元着色器来决定这个点要显示什么东西
     vUv=uv;
     gl_Position =  projectionMatrix * viewMatrix * modelPosition;
     

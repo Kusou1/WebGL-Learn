@@ -1,6 +1,6 @@
 
 precision lowp float;
-uniform float uTime;
+uniform float uTime; // 将时间传递过来
 uniform float uScale;
 varying vec2 vUv;
 
@@ -111,16 +111,18 @@ void main(){
 
     //6利用uv实现短范围内渐变
     // vUv.x
-    // float strength = vUv.y * 10.0;
+    // float strength = vUv.y * 10.0; // 剧烈变化
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
      //7利用通过取模达到反复效果
+     // * 10就能很快的达到1，超过1就会进行反复
     // float strength = mod(vUv.y * 10.0 , 1.0) ;
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
     //8利用step(edge, x)如果x < edge，返回0.0，否则返回1.0
+    // 给一个边界，然后设置0或1，这样就没有渐变
     // float strength =  mod(vUv.y * 10.0 , 1.0) ;
     // strength = step(0.5,strength);
     // gl_FragColor =vec4(strength,strength,strength,1);
@@ -142,7 +144,7 @@ void main(){
     // strength += step(0.8, mod(vUv.y * 10.0 , 1.0)) ;
 
 
-    // 12条纹相乘
+    // 12条纹相乘 只有两个条纹相交的地方显示为白色
     // float strength = step(0.8, mod(vUv.x * 10.0 , 1.0)) ;
     // strength *= step(0.8, mod(vUv.y * 10.0 , 1.0)) ;
 
@@ -162,6 +164,7 @@ void main(){
     // float barY = step(0.4, mod(vUv.y * 10.0 , 1.0))*step(0.8, mod(vUv.x * 10.0 , 1.0))  ;
     // float strength = barX+barY;
 
+    // 获取0-1不仅可以用于设置黑和白，也可以用来设置透明度
     // gl_FragColor =vec4(strength,strength,strength,1);
     // gl_FragColor = vec4(vUv,1,strength);
 
@@ -188,7 +191,7 @@ void main(){
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
-    // 21 利用取整，实现条纹渐变
+    // 21 利用取整，实现条纹渐变 向下取整 阶段性的图形变化
     // float strength = floor(vUv.x*10.0)/10.0;
     // gl_FragColor =vec4(strength,strength,strength,1);
 
@@ -216,18 +219,19 @@ void main(){
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
-    // 25 依据length返回向量长度
+    // 25 依据length返回向量长度   (0,1)
     // float strength = length(vUv);
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
-    // 26 根据distance技术2个向量的距离
+    // 26 根据distance技术2个向量的距离 到向量(0.5,0.5)的距离
+    // 实现了绕着圆点渐变
     // float strength =1.0 - distance(vUv,vec2(0.5,0.5));
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
 
-    // 27根据相除，实现星星
+    // 27根据相除，实现星星  小太阳，光晕的效果
     // float strength =0.15 / distance(vUv,vec2(0.5,0.5)) - 1.0;
     // gl_FragColor =vec4(strength,strength,strength,strength);
 
@@ -253,13 +257,13 @@ void main(){
 
     // 30小日本国旗
     // float strength = step(0.5,distance(vUv,vec2(0.5))+0.25) ;
-    // gl_FragColor =vec4(strength,strength,strength,1);
+    // gl_FragColor =vec4(1,strength,strength,1);
 
     // 31绘制圆
     // float strength = 1.0 - step(0.5,distance(vUv,vec2(0.5))+0.25) ;
     // gl_FragColor =vec4(strength,strength,strength,1);
 
-    // 32圆环
+    // 32圆环 一个大点的圆和小点的圆相乘就可以实现圆环
     // float strength = step(0.5,distance(vUv,vec2(0.5))+0.35) ;
     // strength *= (1.0 - step(0.5,distance(vUv,vec2(0.5))+0.25)) ;
     // gl_FragColor =vec4(strength,strength,strength,1);
@@ -288,7 +292,7 @@ void main(){
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
-    // 38
+    // 38 瞎几儿画
     // vec2 waveUv = vec2(
     //     vUv.x+sin(vUv.y*30.0)*0.1,
     //     vUv.y+sin(vUv.x*30.0)*0.1
@@ -297,7 +301,7 @@ void main(){
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
-// 39
+    // 39 瞎几把画
     // vec2 waveUv = vec2(
     //     vUv.x+sin(vUv.y*100.0)*0.1,
     //     vUv.y+sin(vUv.x*100.0)*0.1
@@ -306,7 +310,7 @@ void main(){
     // gl_FragColor =vec4(strength,strength,strength,1);
 
 
-    // 40 根据角度显示视图
+    // 40 根据角度显示视图 从0->1
     // float angle = atan(vUv.x,vUv.y);
     // float strength = angle;
     // gl_FragColor =vec4(strength,strength,strength,1);
@@ -335,7 +339,7 @@ void main(){
 
     // 44 万花筒
     // float angle = atan(vUv.x-0.5,vUv.y-0.5)/PI;
-    // float strength = mod(angle*10.0,1.0);
+    // float strength = mod(angle*10.0,1.0); // 取模重复
     
     // gl_FragColor =vec4(strength,strength,strength,1);
 
@@ -387,11 +391,8 @@ void main(){
 
 
     vec3 mixColor =  mix(greenColor,uvColor,strength);
-    // gl_FragColor =vec4(mixColor,1.0);
     gl_FragColor =vec4(mixColor,1.0);
-
-    
-
+    gl_FragColor =vec4(mixColor,1.0);
 
 
 }
