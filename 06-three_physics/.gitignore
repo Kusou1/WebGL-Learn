@@ -4,4 +4,6 @@
 
 **/dist/*
 !**/dist/textures
+!**/dist/texture
+!**/dist/assets
 /dist/*.map

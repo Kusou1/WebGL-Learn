@@ -5,3 +5,4 @@
 **/dist/*
 !**/dist/textures
 /dist/*.map
+!**/dist/texture

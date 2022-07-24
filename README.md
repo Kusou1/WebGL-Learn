@@ -1,4 +1,4 @@
-# Graph is Awesome!
+# <center>Graph is Awesome!</center>
 
 ## 项目相关目录
 - [threejs_basic 基础](./01-three_basic)
