@@ -24,7 +24,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 // 设置相机位置
 // object3d具有position，属性是1个3维的向量
-camera.position.set(0, 0, 2);
+camera.position.set(0.3, 0.3, 0.3);
 // 更新摄像头
 camera.aspect = window.innerWidth / window.innerHeight;
 //   更新摄像机的投影矩阵
@@ -36,17 +36,17 @@ const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
 const params = {
-  uWaresFrequency: 14,
-  uScale: 0.03,
+  uWaresFrequency: 14, // 频率
+  uScale: 0.03, // 高度
   uXzScale: 1.5,
-  uNoiseFrequency: 10,
+  uNoiseFrequency: 10, // 噪音频率
   uNoiseScale: 1.5,
-  uLowColor: "#c9e6d1",
-  uHighColor: "#566aaa",
+  uLowColor: "#c9e6d1", //低点颜色
+  uHighColor: "#566aaa", // 高点颜色
   uXspeed: 1,
   uZspeed: 1,
-  uNoiseSpeed: 1,
-  uOpacity: 1,
+  uNoiseSpeed: 1, // 噪音速度
+  uOpacity: 1, // 透明度
 };
 
 const shaderMaterial = new THREE.ShaderMaterial({
@@ -91,7 +91,7 @@ const shaderMaterial = new THREE.ShaderMaterial({
       value: params.uOpacity,
     },
   },
-  transparent: true,
+  transparent: true, // 允许透明
 });
 
 gui

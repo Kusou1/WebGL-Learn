@@ -7,7 +7,7 @@ import * as dat from "dat.gui";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-// 导入water
+// 导入官方提供的water模型
 import { Water } from "three/examples/jsm/objects/Water2";
 
 // 目标：认识shader
@@ -53,6 +53,8 @@ scene.add(axesHelper);
 // 加载场景背景
 const rgbeLoader = new RGBELoader();
 rgbeLoader.loadAsync("./assets/050.hdr").then((texture) => {
+  // THREE.EquirectangularReflectionMapping
+  // 绑定经纬球的投影
   texture.mapping = THREE.EquirectangularReflectionMapping;
   scene.background = texture;
   scene.environment = texture;
@@ -65,10 +67,14 @@ gltfLoader.load("./assets/model/yugang.glb", (gltf) => {
   const yugang = gltf.scene.children[0];
   yugang.material.side = THREE.DoubleSide;
 
+  // 将浴缸的几何体为水设置
+  // waterGeometry
+  // 这样就可以让水在浴缸里啦
   const waterGeometry = gltf.scene.children[1].geometry;
+  // 参数设置水的颜色
   const water = new Water(waterGeometry, {
     color: "#ffffff",
-    scale: 1,
+    scale: 0.5,
     flowDirection: new THREE.Vector2(1, 1),
     textureHeight: 1024,
     textureWidth: 1024,

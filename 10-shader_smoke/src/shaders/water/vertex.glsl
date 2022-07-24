@@ -95,8 +95,10 @@ float cnoise(vec2 P)
 void main(){
     vec4 modelPosition = modelMatrix * vec4(position,1.0);
 
+    // 海拔参数计算 
     float elevation = sin(modelPosition.x*uWaresFrequency+uTime*uXspeed)*sin(modelPosition.z*uWaresFrequency*uXzScale+uTime*uZspeed);
 
+    // 在基础波浪的基础上再加上随机的波浪曲线
     elevation += -abs(cnoise(vec2(modelPosition.xz*uNoiseFrequency+uTime*uNoiseSpeed))) *uNoiseScale;
     
     vElevation = elevation;
@@ -104,7 +106,7 @@ void main(){
     elevation *= uScale;
 
     
-
+    // 波浪起伏
     modelPosition.y += elevation;
 
     gl_Position = projectionMatrix * viewMatrix *modelPosition;
