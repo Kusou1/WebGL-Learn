@@ -7,7 +7,7 @@
 - [three.js_raycaster raycaster光线投射与物体交互](./04-three_raycaster)
 - [three.js_full_scroll 3D全频滚动官网](./05-three_full_scroll)
 - [three.js_physics 应用物理引擎设置物体相互作用](./06-three_physics)
-- [three.js_shader](./07-three_shader)
+- [three.js_shader Shader](./07-three_shader)
 - 
   
 ## WebGL是什么
