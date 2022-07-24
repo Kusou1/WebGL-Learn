@@ -19,6 +19,7 @@ precision highp float;
 void main(){
     vec4 modelPosition = modelMatrix * vec4( position, 1.0 );
 
+    // 通过gui控制旗帜飘扬的频率与范围 uFrequency uScale
     modelPosition.z += sin((modelPosition.x+uTime) * uFrequency)*uScale ;
     modelPosition.z += cos((modelPosition.y+uTime) * uFrequency)*uScale ;
 
