@@ -1,0 +1,63 @@
+## . 什么是着色器材质
+
+着色器材质（ShaderMaterial）是一个用GLSL编写的[小程序](https://cloud.tencent.com/product/tcb?from=10680) ，在[GPU](https://cloud.tencent.com/product/gpu?from=10680)上运行。它能够提供 materials 之外的效果，也可以将许多对象组合成单个Geometry或BufferGeometry以提高性能。
+
+## 2. 着色器材质的变量
+
+每个着色器材质都可以指定两种不同类型的shaders，他们是顶点着色器和片元着色器(Vertex shaders and fragment shaders)。
+
+- 顶点着色器首先运行; 它接收attributes， 计算/操纵每个单独顶点的位置，并将其他数据（varyings）传递给片元着色器。
+- 片元（或像素）着色器后运行; 它设置渲染到屏幕的每个单独的“片元”（像素）的颜色。
+
+shader中有三种类型的变量: uniforms, attributes, 和 varyings
+
+- Uniforms是所有顶点都具有相同的值的变量。 比如灯光，雾，和阴影贴图就是被储存在uniforms中的数据。 uniforms可以通过顶点着色器和片元着色器来访问。
+- Attributes 与每个顶点关联的变量。例如，顶点位置，法线和顶点颜色都是存储在attributes中的数据。attributes 只 可以在顶点着色器中访问。
+- Varyings 是从顶点着色器传递到片元着色器的变量。对于每一个片元，每一个varying的值将是相邻顶点值的平滑插值。
+
+注意：在shader 内部，uniforms和attributes就像常量；你只能使用JavaScript代码通过缓冲区来修改它们的值。
+
+## 3. 着色器材质的使用
+
+上面说了每个着色器材质都可以指定两种不同类型的shaders，不过如果我们不去指定这两个shaders而直接使用也不会报错，因为ShaderMaterial已经定义了默认的顶点着色器和片元着色器，他们的代码是这样的。
+
+```javascript
+//顶点着色器代码
+void main() {
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+}
+//片元着色器代码
+void main() {
+	gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+}
+```
+
+这里的projectionMatrix、modelViewMatrix和position都是three为我们设置好的变量，可以直接拿来用，前两个变量我们之前已经说了，而position就是每一个顶点的坐标值，当着色器代码执行时，会循环执行gl_Position和gl_FragColor设置顶点位置，和颜色插值。并且我们最终要设置的就是gl_Position和gl_FragColor。多的先不说，下面看一个小例子
+
+```javascript
+var geom = new THREE.SphereGeometry(10, 30, 20);
+var mate = new THREE.ShaderMaterial({
+    vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+				//将attributes的normal通过varying赋值给了向量vNormal
+        vNormal = normal;
+				//projectionMatrix是投影变换矩阵 modelViewMatrix是相机坐标系的变换矩阵 最后我们将y值乘以1.4得到了一个形如鸡蛋的几何体
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position.x, position.y * 1.4, position.z, 1.0 );
+    }
+    `,
+    fragmentShader: `
+		//片元着色器同样需要定义varying vec3 vNormal；
+    varying vec3 vNormal;
+    void main() {
+				//vNormal是一个已经归一化的三维向量
+        float pr = (vNormal.x + 1.0) / 2.0; //pr红色通道值范围为0~1
+        float pg = (vNormal.y + 1.0) / 2.0; //pg绿色通道值范围为0~1
+        float pb = (vNormal.z + 1.0) / 2.0; //pb蓝色通道值范围为0~1
+        gl_FragColor=vec4(pr, pg, pb, 1.0); //最后设置顶点颜色，点与点之间会自动插值
+    }
+    `
+})
+var mesh = new THREE.Mesh(geom, mate);
+scene.add(mesh)
+```

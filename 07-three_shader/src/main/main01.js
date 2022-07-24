@@ -51,11 +51,15 @@ const params = {
 // const material = new THREE.MeshBasicMaterial({ color: "#00ff00" });
 // 创建着色器材质
 const shaderMaterial = new THREE.ShaderMaterial({
+  // 顶点着色器  描述点的位置 4个纬度
+  // projectionMatrix * viewMatrix * modelMatrix 顶点变换
+  // <投影矩阵> * <视图矩阵> * <模型矩阵> * <顶点坐标>
   vertexShader: `
         void main(){
             gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4( position, 1.0 ) ;
         }
     `,
+  // 片元着色器  应该怎么去显示,对每一个需要渲染的像素运行fragment shader
   fragmentShader: `
         void main(){
             gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
@@ -64,6 +68,10 @@ const shaderMaterial = new THREE.ShaderMaterial({
 });
 
 // 创建平面
+// width — 平面沿着X轴的宽度。默认值是1。
+// height — 平面沿着Y轴的高度。默认值是1。
+// widthSegments — （可选）平面的宽度分段数，默认值是1。
+// heightSegments — （可选）平面的高度分段数，默认值是1。
 const floor = new THREE.Mesh(
   new THREE.PlaneBufferGeometry(1, 1, 64, 64),
   shaderMaterial

@@ -42,6 +42,7 @@ scene.add(axesHelper);
 
 // 创建纹理加载器对象
 const textureLoader = new THREE.TextureLoader();
+// 导入图像
 const texture = textureLoader.load("./texture/ca.jpeg");
 const params = {
   uFrequency: 10,
@@ -55,10 +56,12 @@ const rawShaderMaterial = new THREE.RawShaderMaterial({
   fragmentShader: basicFragmentShader,
   //   wireframe: true,
   side: THREE.DoubleSide,
+  // 通过uniforms向shader传递参数
   uniforms: {
     uTime: {
       value: 0,
     },
+    // 将图片传到着色器中以供渲染
     uTexture: {
       value: texture,
     },
@@ -66,6 +69,11 @@ const rawShaderMaterial = new THREE.RawShaderMaterial({
 });
 
 // 创建平面
+// width — 平面沿着X轴的宽度。默认值是1。
+// height — 平面沿着Y轴的高度。默认值是1。
+// widthSegments — （可选）平面的宽度分段数，默认值是1。
+// heightSegments — （可选）平面的高度分段数，默认值是1。
+// 64 * 64段
 const floor = new THREE.Mesh(
   new THREE.PlaneBufferGeometry(1, 1, 64, 64),
   rawShaderMaterial
