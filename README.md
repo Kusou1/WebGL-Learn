@@ -8,8 +8,8 @@
 - [three.js_full_scroll 3D全频滚动官网](./05-three_full_scroll)
 - [three.js_physics 应用物理引擎设置物体相互作用](./06-three_physics)
 - [three.js_shader Shader](./07-three_shader)
-- [three.js_shader_graph Shader glsl深入学习，编写各种类型的图案](./07-three_shader_graph)
-- [three.js_shader_kongming shader打造漫天飞舞孔明灯](./07-three_shader_kongming)
+- [three.js_shader_graph Shader glsl深入学习，编写各种类型的图案](./08-three_shader_graph)
+- [three.js_shader_kongming shader打造漫天飞舞孔明灯](./09-three_shader_kongming)
 - 
   
 ## WebGL是什么
