@@ -1,9 +1,9 @@
-/node_modules
-/.cache
-/.parcel-cache
+**/node_modules
+**/.cache
+**/.parcel-cache
 
 **/dist/*
 !**/dist/textures
+**/dist/*.map
 !**/dist/texture
 !**/dist/assets
-/dist/*.map
