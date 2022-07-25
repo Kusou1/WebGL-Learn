@@ -132,6 +132,8 @@ const generateGalaxy = () => {
     positions[current + 2] = Math.sin(branchAngel) * radius + randomZ;
 
     const mixColor = galaxyColor.clone();
+    
+    // 根据距离圆心的距离渐变
     mixColor.lerp(outGalaxyColor, radius / params.radius);
 
     //   设置颜色
@@ -172,8 +174,8 @@ const generateGalaxy = () => {
     
     transparent: true,
     vertexColors: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
+    blending: THREE.AdditiveBlending, // 叠加效果
+    depthWrite: false, // 深度的检测
     uniforms: {
       uTime: {
         value: 0,
