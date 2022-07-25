@@ -14,6 +14,7 @@
 - [three.js_shader_particle 着色器粒子效果](./11-shader_particle_effect)
 - [three.js_firework 烟花](./12-firework)
 - [three.js_shader_material 使用着色器加工材质](./13-shader_material)
+- [three.js_effect_composer 效果合成器](./14-effect_composer/)
   
   
 ## WebGL是什么
