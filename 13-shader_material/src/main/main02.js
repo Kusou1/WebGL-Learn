@@ -23,7 +23,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 // 设置相机位置
 // object3d具有position，属性是1个3维的向量
-camera.position.set(0, 0, 10);
+camera.position.set(0, 15, 20);
 scene.add(camera);
 
 // 加入辅助轴，帮助我们查看3维坐标轴
@@ -56,7 +56,7 @@ const envMapTexture = cubeTextureLoader.load([
 
 
 const directionLight = new THREE.DirectionalLight('#ffffff',1);
-directionLight.castShadow = true;
+directionLight.castShadow = true; // 光线允许投射阴影
 directionLight.position.set(0,0,200)
 scene.add(directionLight)
 
@@ -80,15 +80,18 @@ const customUniforms = {
     value:0
   }
 }
+
 material.onBeforeCompile = (shader)=>{
   console.log(shader.vertexShader);
   console.log(shader.fragmentShader);
   // 传递时间
   shader.uniforms.uTime = customUniforms.uTime;
+  // 使用顶点着色器使人物变形
   shader.vertexShader = shader.vertexShader.replace(
     '#include <common>',
     `
     #include <common>
+    // 旋转矩阵
     mat2 rotate2d(float _angle){
       return mat2(cos(_angle),-sin(_angle),
                   sin(_angle),cos(_angle));
@@ -115,6 +118,7 @@ material.onBeforeCompile = (shader)=>{
     // float angle = transformed.y*0.5;
     // mat2 rotateMatrix = rotate2d(angle);
     
+    // 乘以旋转矩阵获得旋转后的结果
     
     transformed.xz = rotateMatrix * transformed.xz;
 
@@ -150,7 +154,7 @@ depthMaterial.onBeforeCompile = (shader)=>{
     
     
     transformed.xz = rotateMatrix * transformed.xz;
-    transformed.xz += 0.2;
+
 
     `
   )
@@ -164,8 +168,9 @@ gltfLoader.load('./models/LeePerrySmith/LeePerrySmith.glb',(gltf)=>{
   const mesh = gltf.scene.children[0];
   console.log(mesh)
   mesh.material = material;
-  mesh.castShadow = true;
+  mesh.castShadow = true; // 物体允许投射阴影
   // 设定自定义的深度材质
+  // 如果要修改顶点着色器中的顶点位置，则必须指定 customDepthMaterial 以获得正确的阴影。默认为未定义。
   mesh.customDepthMaterial = depthMaterial;
   scene.add(mesh);
 })
@@ -177,7 +182,7 @@ const plane = new THREE.Mesh(
   new THREE.MeshStandardMaterial()
 )
 plane.position.set(0,0,-6);
-plane.receiveShadow = true;
+plane.receiveShadow = true; // 平面允许接收阴影
 scene.add(plane)
 
 

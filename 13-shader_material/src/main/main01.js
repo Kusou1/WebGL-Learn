@@ -43,6 +43,7 @@ const basicUnifrom = {
   }
 }
 basicMaterial.onBeforeCompile = (shader,renderer)=>{
+  // 这里可以拿到顶点着色器和片元着色器
   console.log(shader);
   console.log(shader.vertexShader)
   console.log(shader.fragmentShader)
