@@ -7,6 +7,7 @@ import fireworksVertex from "../shaders/fireworks/vertex.glsl";
 export default class Fireworks {
   constructor(color, to, from = { x: 0, y: 0, z: 0 }) {
     // console.log("创建烟花：", color, to);
+    // 当前对象的颜色
     this.color = new Three.Color(color);
 
     // 创建烟花发射的球点
@@ -20,6 +21,7 @@ export default class Fireworks {
       new Three.BufferAttribute(startPositionArray, 3)
     );
 
+    // 算出起点和终点的向量
     const astepArray = new Float32Array(3);
     astepArray[0] = to.x - from.x;
     astepArray[1] = to.y - from.y;
@@ -58,6 +60,7 @@ export default class Fireworks {
     this.fireworkGeometry = new Three.BufferGeometry();
     this.FireworksCount = 180 + Math.floor(Math.random() * 180);
     const positionFireworksArray = new Float32Array(this.FireworksCount * 3);
+    // 烟花大小
     const scaleFireArray = new Float32Array(this.FireworksCount);
     const directionArray = new Float32Array(this.FireworksCount * 3);
     for (let i = 0; i < this.FireworksCount; i++) {
@@ -69,10 +72,11 @@ export default class Fireworks {
       scaleFireArray[i] = Math.random();
       //   设置四周发射的角度
 
-      let theta = Math.random() * 2 * Math.PI;
-      let beta = Math.random() * 2 * Math.PI;
-      let r = Math.random();
+      let theta = Math.random() * 2 * Math.PI; // 经度
+      let beta = Math.random() * 2 * Math.PI; // 纬度
+      let r = Math.random(); // 半径
 
+      // 设置烟花散开方向 三角函数
       directionArray[i * 3 + 0] = r * Math.sin(theta) + r * Math.sin(beta);
       directionArray[i * 3 + 1] = r * Math.cos(theta) + r * Math.cos(beta);
       directionArray[i * 3 + 2] = r * Math.sin(theta) + r * Math.cos(beta);
@@ -83,6 +87,7 @@ export default class Fireworks {
       //     directionArray[i * 3 + 2]
       //   );
     }
+    // 传递参数到shader
     this.fireworkGeometry.setAttribute(
       "position",
       new Three.BufferAttribute(positionFireworksArray, 3)
@@ -113,6 +118,7 @@ export default class Fireworks {
       fragmentShader: fireworksFragment,
     });
 
+    // 设置点
     this.fireworks = new Three.Points(
       this.fireworkGeometry,
       this.fireworksMaterial
@@ -151,20 +157,25 @@ export default class Fireworks {
   update() {
     const elapsedTime = this.clock.getElapsedTime();
     // console.log(elapsedTime);
-    if (elapsedTime > 0.2 && elapsedTime < 1) {
+    if (elapsedTime > 0.5 && elapsedTime < 1) {
       if (!this.sendSound.isPlaying && !this.sendSoundplay) {
         this.sendSound.play();
         this.sendSoundplay = true;
       }
+      // 将时间传给uTime
       this.startMaterial.uniforms.uTime.value = elapsedTime;
       this.startMaterial.uniforms.uSize.value = 20;
-    } else if (elapsedTime > 0.2) {
+    } else if (elapsedTime > 0.5) {
       const time = elapsedTime - 1;
       //   让点元素消失
       this.startMaterial.uniforms.uSize.value = 0;
+      //   清除内存
       this.startPoint.clear();
+      //   几何体清除
       this.startGeometry.dispose();
+      //   材质清除
       this.startMaterial.dispose();
+      // 烟花的声音
       if (!this.sound.isPlaying && !this.play) {
         this.sound.play();
         this.play = true;
@@ -174,7 +185,8 @@ export default class Fireworks {
       //   console.log(time);
       this.fireworksMaterial.uniforms.uTime.value = time;
 
-      if (time > 5) {
+      // 烟花清除
+      if (time > 15) {
         this.fireworksMaterial.uniforms.uSize.value = 0;
         this.fireworks.clear();
         this.fireworkGeometry.dispose();

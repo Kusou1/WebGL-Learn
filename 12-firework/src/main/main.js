@@ -31,7 +31,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 // 设置相机位置
 // object3d具有position，属性是1个3维的向量
-camera.position.set(0, 0, 20);
+camera.position.set(20, 20, 20);
 // 更新摄像头
 camera.aspect = window.innerWidth / window.innerHeight;
 //   更新摄像机的投影矩阵
@@ -75,6 +75,7 @@ renderer.toneMappingExposure = 0.4;
 
 const gltfLoader = new GLTFLoader();
 let LightBox = null;
+// 使用GLTFLoader加载场景
 gltfLoader.load("./assets/model/newyears_min.glb", (gltf) => {
   console.log(gltf);
   scene.add(gltf.scene);
@@ -158,6 +159,7 @@ function animate(t) {
   //   console.log(fireworks);
   fireworks.forEach((item, i) => {
     const type = item.update();
+    // 如果状态未移除则将它删除
     if (type == "remove") {
       fireworks.splice(i, 1);
     }
@@ -172,11 +174,13 @@ animate();
 
 // 设置创建烟花函数
 let createFireworks = () => {
+  // hsl中，颜色越接近白色，L就越靠近1,H决定颜色，随机H来获取随机的颜色
   let color = `hsl(${Math.floor(Math.random() * 360)},100%,80%)`;
+  // 随机位置
   let position = {
     x: (Math.random() - 0.5) * 40,
     z: -(Math.random() - 0.5) * 40,
-    y: 3 + Math.random() * 15,
+    y: 3 + Math.random() * 15, // 高度
   };
 
   // 随机生成颜色和烟花放的位置
