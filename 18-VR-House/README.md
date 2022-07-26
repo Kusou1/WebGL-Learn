@@ -1,5 +1,9 @@
 # VR 360 看房
 
+其实就是给立方体贴上6个面，我们身处在中央就能实现这样的效果
+
+![house](../assets/three_js/house.png)
+
 ## Project setup
 ```
 yarn install

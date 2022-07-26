@@ -14,14 +14,14 @@ import {
 } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 // 初始化场景
 const scene = new THREE.Scene();
-// 初始化相机
+// 初始化相机 透视相机
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
-// 设置相机位置
+// 设置相机位置 尽量靠近中心的位置
 camera.position.z = 0.1;
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer();
@@ -72,12 +72,15 @@ function makeCube(position, arrImg, imgPath, name) {
   return cube;
 }
 
+// 客厅
 let cube = makeCube(
   new THREE.Vector3(0, 0, 0),
   ["4_l", "4_r", "4_u", "4_d", "4_b", "4_f"],
   "./imgs/living",
   "livingRoom"
 );
+
+// 厨房
 let kitchen = makeCube(
   new THREE.Vector3(500, 0, -360),
   ["0_l", "0_r", "0_u", "0_d", "0_b", "0_f"],
@@ -95,11 +98,13 @@ onMounted(() => {
   // 添加控制器
   const controls = new OrbitControls(camera, container.value);
   controls.enableDamping = true;
+  // 将渲染器的内容加到container中
   container.value.appendChild(renderer.domElement);
   const render = () => {
     controls.update();
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
+    // 每一帧都进行调用
     requestAnimationFrame(render);
   };
   render();
@@ -111,6 +116,7 @@ onMounted(() => {
     e.preventDefault();
     mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    // 通过射线进行碰撞
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children);
     if (intersects.length > 0) {
@@ -132,7 +138,7 @@ onMounted(() => {
               console.log("完成");
               gsap.to(camera.position, {
                 duration: 0.5,
-                x: home[key].position.x - 1,
+                x: home[key].position.x + 15,
                 y: home[key].position.y,
                 z: home[key].position.z + 1,
               });
@@ -152,6 +158,7 @@ onMounted(() => {
     transparent: true,
     blending: THREE.AdditiveBlending,
   });
+  // 设置精灵图位置
   const sprite = new THREE.Sprite(spriteMaterial);
   sprite.position.set(245, -12, -181);
   sprite.scale.set(25, 25, 25);
