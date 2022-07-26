@@ -17,6 +17,7 @@
 - [three.js_effect_composer 效果合成器](./14-effect_composer/)
 - [three.js_css_render HTML混合3D渲染](./15-CSS_Render/)
 - [three.js_curve 曲线应用](./16-curve/)
+- [three.js_deformation 物体的形变](./17-deformation/)
 
   
   
