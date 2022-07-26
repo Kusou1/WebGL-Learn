@@ -65,7 +65,8 @@ function init() {
   moon = new THREE.Mesh(moonGeometry, moonMaterial);
   scene.add(moon);
 
-  //根据这一系列的点创建曲线
+  // 根据这一系列的点(向量)创建曲线
+  // 以数组的形式传入函数
   curve = new THREE.CatmullRomCurve3(
     [
       new THREE.Vector3(-10, 0, 10),
@@ -77,11 +78,12 @@ function init() {
     true
   );
 
-  // 在曲线里，getPoints获取51个点
+  // 在曲线里，getPoints获取501个点，传入500等于分隔500项
   const points = curve.getPoints(500);
   console.log(points);
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
+  // 基础线条材质
   const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
 
   // Create the final object to add to the scene
@@ -118,12 +120,14 @@ function animate() {
   requestAnimationFrame(animate);
 
   const elapsed = clock.getElapsedTime();
-  const time = elapsed/10%1;
+  const time = elapsed/10%1; // 转换成从0-1
   const point = curve.getPoint(time);
   // console.log(point)
+  // 让月球跟随曲线运动
   moon.position.copy(point);
   // moon.position.set(Math.sin(elapsed) * 5, 0, Math.cos(elapsed) * 5);
-  camera.position.copy(point);
+  // 让相机跟随曲线运动
+  // camera.position.copy(point);
   camera.lookAt(earth.position)
   renderer.render(scene, camera);
 }
