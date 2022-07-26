@@ -18,6 +18,8 @@
 - [three.js_css_render HTML混合3D渲染](./15-CSS_Render/)
 - [three.js_curve 曲线应用](./16-curve/)
 - [three.js_deformation 物体的形变](./17-deformation/)
+- [three.js_vr-house 全景VR看房](./18-VR-House//)
+
 
   
   
