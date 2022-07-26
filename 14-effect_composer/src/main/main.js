@@ -206,6 +206,7 @@ window.addEventListener("resize", () => {
 
 const normalTexture = textureLoader.load('./textures/interfaceNormalMap.png');
 
+// tDiffuse是ShaderPass用来传递上一个pass纹理的名称，因此我们几乎总是需要它
 const techPass = new ShaderPass({
   uniforms:{
     tDiffuse:{
@@ -233,12 +234,14 @@ const techPass = new ShaderPass({
     void main(){
 
       vec2 newUv = vUv;
+      // 水波纹效果实现
       newUv += sin(newUv.x*10.0+uTime*0.5)*0.03;
 
       vec4 color = texture2D(tDiffuse,newUv);
       // gl_FragColor = vec4(vUv,0.0,1.0);
       vec4 normalColor = texture2D(uNormalMap,vUv);
-      // 设置光线的角度
+      // normalize转换成单位向量
+      // 设置光线的角度 使两个叠加
       vec3 lightDirection = normalize(vec3(-5,5,2)) ;
 
       float lightness = clamp(dot(normalColor.xyz,lightDirection),0.0,1.0) ;
@@ -247,6 +250,7 @@ const techPass = new ShaderPass({
     }
   `
 })
+// 加上带面具的效果
 techPass.material.uniforms.uNormalMap.value = normalTexture;
 effectComposer.addPass(techPass);
 

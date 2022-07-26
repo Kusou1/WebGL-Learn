@@ -102,7 +102,7 @@ renderer.shadowMap.enabled = true;
 const effectComposer = new EffectComposer(renderer);
 effectComposer.setSize(window.innerWidth, window.innerHeight);
 
-// 添加渲染通道
+// 添加渲染通道  把相机和场景放进去
 const renderPass = new RenderPass(scene,camera);
 effectComposer.addPass(renderPass)
 
@@ -121,6 +121,7 @@ const unrealBloomPass = new UnrealBloomPass();
 effectComposer.addPass(unrealBloomPass)
 
 const glitchPass = new GlitchPass();
+glitchPass.enabled = false;
 effectComposer.addPass(glitchPass)
 
 // unrealBloomPass.exposure = 1;
@@ -172,6 +173,8 @@ function animate(t) {
   requestAnimationFrame(animate);
   // 使用渲染器渲染相机看这个场景的内容渲染出来
   // renderer.render(scene, camera);
+  
+  // 使用效果合成去渲染
   effectComposer.render()
 }
 
