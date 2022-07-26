@@ -7,3 +7,5 @@
 **/dist/*.map
 !**/dist/texture
 !**/dist/assets
+!**/dist/draco
+!**/dist/model

@@ -59,126 +59,148 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 let mixer;
 let stem, petal, stem1, petal1, stem2, petal2, stem3, petal3;
-gltfLoader.load("./model/f4.glb", function (gltf) {
-  console.log(gltf);
-  gltf.scene.rotation.x = Math.PI;
-  gltf.scene.traverse((item) => {
-    if (item.material && item.material.name == "Water") {
-      console.log(item);
-      // item.renderOrder = 9;
-      // item.material.blending = THREE.AdditiveBlending;
-      // item.scale.set(0.8, 0.8, 0.8);
-      // item.material.depthTest = false;
+gltfLoader.load("./model/sphere1.glb",function(gltf1){
+  scene.add(gltf1.scene)
+  let sphere1 = gltf1.scene.children[0];
+  gltfLoader.load("./model/sphere2.glb",function(gltf2){
+    sphere1.geometry.morphAttributes.position = []
+    // 放入形变数据
+    sphere1.geometry.morphAttributes.position = [gltf2.scene.children[0].geometry.attributes.position];
+    // 更新形变数据
+    sphere1.updateMorphTargets()
+    // 0-1
+    sphere1.morphTargetInfluences[0]=1
+    gsap.to(params,{
+      value:1,
+      duration:2,
+      repeat:-1,
+      yoyo:true,
+      onUpdate:function(){
+        sphere1.morphTargetInfluences[0]=params.value
+      }
+    })
+  })
+})
+// gltfLoader.load("./model/f4.glb", function (gltf) {
+//   console.log(gltf);
+//   gltf.scene.rotation.x = Math.PI;
+//   gltf.scene.traverse((item) => {
+//     if (item.material && item.material.name == "Water") {
+//       console.log(item);
+//       // item.renderOrder = 9;
+//       // item.material.blending = THREE.AdditiveBlending;
+//       // item.scale.set(0.8, 0.8, 0.8);
+//       // item.material.depthTest = false;
 
-      // // item.material.transparent = false;
-      // item.material.depthWrite = true;
-      // item.material.side = THREE.DoubleSide;
-      // item.material = new THREE.MeshBasicMaterial({
-      //   color: "skyblue",
-      //   depthWrite: false,
-      //   depthTest: false,
-      //   transparent: true,
-      //   opacity: 0.7,
-      // });
+//       // // item.material.transparent = false;
+//       // item.material.depthWrite = true;
+//       // item.material.side = THREE.DoubleSide;
+//       // item.material = new THREE.MeshBasicMaterial({
+//       //   color: "skyblue",
+//       //   depthWrite: false,
+//       //   depthTest: false,
+//       //   transparent: true,
+//       //   opacity: 0.7,
+//       // });
 
-      item.material = new THREE.MeshStandardMaterial({
-        color: "skyblue",
-        depthWrite: false,
-        depthTest: false,
-        transparent: true,
-        opacity: 0.7,
-      });
-    }
-    if (item.material && item.material.name == "Stem") {
-      stem = item;
-    }
+//       item.material = new THREE.MeshStandardMaterial({
+//         color: "skyblue",
+//         depthWrite: false,
+//         depthTest: false,
+//         transparent: true,
+//         opacity: 0.7,
+//       });
+//     }
+//     if (item.material && item.material.name == "Stem") {
+//       stem = item;
+//     }
 
-    if (item.material && item.material.name == "Petal") {
-      console.log(item);
-      petal = item;
+//     if (item.material && item.material.name == "Petal") {
+//       console.log(item);
+//       petal = item;
 
-      gltfLoader.load("./model/f2.glb", (gltf) => {
-        gltf.scene.traverse((item) => {
-          if (item.material && item.material.name == "Petal") {
-            petal1 = item;
-            // console.log(petal1.geometry.attributes.position);
-            if (!petal.geometry.morphAttributes.position) {
-              petal.geometry.morphAttributes.position = [];
-            }
-            petal.geometry.morphAttributes.position[0] =
-              petal1.geometry.attributes.position;
+//       gltfLoader.load("./model/f2.glb", (gltf) => {
+//         gltf.scene.traverse((item) => {
+//           if (item.material && item.material.name == "Petal") {
+//             petal1 = item;
+//             // console.log(petal1.geometry.attributes.position);
+//             if (!petal.geometry.morphAttributes.position) {
+//               petal.geometry.morphAttributes.position = [];
+//             }
+//             petal.geometry.morphAttributes.position[0] =
+//               petal1.geometry.attributes.position;
 
-            console.log(petal.morphTargetInfluences);
-            petal.updateMorphTargets();
-            petal.morphTargetInfluences[0] = 1;
-            console.log(petal.geometry.morphAttributes);
+//             console.log(petal.morphTargetInfluences);
+//             petal.updateMorphTargets();
+//             petal.morphTargetInfluences[0] = 1;
+//             console.log(petal.geometry.morphAttributes);
 
-            gsap.to(params, {
-              value0: 1,
-              duration: 10,
-              // repeat: -1,
-              delay: 0,
-              onUpdate: function () {
-                petal.morphTargetInfluences[0] = params.value0;
-                stem.morphTargetInfluences[0] = params.value0;
-              },
-            });
-          }
-          if (item.material && item.material.name == "Stem") {
-            stem1 = item;
-            if (!stem.geometry.morphAttributes.position) {
-              stem.geometry.morphAttributes.position = [];
-            }
-            stem.geometry.morphAttributes.position[0] =
-              stem1.geometry.attributes.position;
-            stem.updateMorphTargets();
-            stem.morphTargetInfluences[0] = 1;
-          }
-        });
+//             gsap.to(params, {
+//               value0: 1,
+//               duration: 10,
+//               // repeat: -1,
+//               delay: 0,
+//               onUpdate: function () {
+//                 petal.morphTargetInfluences[0] = params.value0;
+//                 stem.morphTargetInfluences[0] = params.value0;
+//               },
+//             });
+//           }
+//           if (item.material && item.material.name == "Stem") {
+//             stem1 = item;
+//             if (!stem.geometry.morphAttributes.position) {
+//               stem.geometry.morphAttributes.position = [];
+//             }
+//             stem.geometry.morphAttributes.position[0] =
+//               stem1.geometry.attributes.position;
+//             stem.updateMorphTargets();
+//             stem.morphTargetInfluences[0] = 1;
+//           }
+//         });
 
-        gltfLoader.load("./model/f1.glb", (gltf) => {
-          gltf.scene.traverse((item) => {
-            if (item.material && item.material.name == "Petal") {
-              petal2 = item;
+//         gltfLoader.load("./model/f1.glb", (gltf) => {
+//           gltf.scene.traverse((item) => {
+//             if (item.material && item.material.name == "Petal") {
+//               petal2 = item;
 
-              // console.log(petal1.geometry.attributes.position);
-              petal.geometry.morphAttributes.position[1] =
-                petal2.geometry.attributes.position;
-              console.log(petal.morphTargetInfluences);
-              petal.updateMorphTargets();
-              petal.morphTargetInfluences[1] = 0;
-              console.log(petal.geometry.morphAttributes);
+//               // console.log(petal1.geometry.attributes.position);
+//               petal.geometry.morphAttributes.position[1] =
+//                 petal2.geometry.attributes.position;
+//               console.log(petal.morphTargetInfluences);
+//               petal.updateMorphTargets();
+//               petal.morphTargetInfluences[1] = 0;
+//               console.log(petal.geometry.morphAttributes);
 
-              gsap.to(params, {
-                value1: 1,
-                duration: 10,
-                delay: 10,
-                // repeat: -1,
-                onUpdate: function () {
-                  // console.log(petal.morphTargetInfluences);
-                  console.log(stem.morphTargetInfluences);
-                  petal.morphTargetInfluences[0] = params.value0;
-                  stem.morphTargetInfluences[0] = params.value0;
-                  petal.morphTargetInfluences[1] = params.value1;
-                  stem.morphTargetInfluences[1] = params.value1;
-                },
-              });
-            }
-            if (item.material && item.material.name == "Stem") {
-              stem2 = item;
+//               gsap.to(params, {
+//                 value1: 1,
+//                 duration: 10,
+//                 delay: 10,
+//                 // repeat: -1,
+//                 onUpdate: function () {
+//                   // console.log(petal.morphTargetInfluences);
+//                   console.log(stem.morphTargetInfluences);
+//                   petal.morphTargetInfluences[0] = params.value0;
+//                   stem.morphTargetInfluences[0] = params.value0;
+//                   petal.morphTargetInfluences[1] = params.value1;
+//                   stem.morphTargetInfluences[1] = params.value1;
+//                 },
+//               });
+//             }
+//             if (item.material && item.material.name == "Stem") {
+//               stem2 = item;
 
-              stem.geometry.morphAttributes.position[1] =
-                stem2.geometry.attributes.position;
-              stem.updateMorphTargets();
-              stem.morphTargetInfluences[1] = 0;
-            }
-          });
-        });
-      });
-    }
-  });
-  scene.add(gltf.scene);
-});
+//               stem.geometry.morphAttributes.position[1] =
+//                 stem2.geometry.attributes.position;
+//               stem.updateMorphTargets();
+//               stem.morphTargetInfluences[1] = 0;
+//             }
+//           });
+//         });
+//       });
+//     }
+//   });
+//   scene.add(gltf.scene);
+// });
 
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer({

@@ -59,13 +59,16 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 let mixer;
 let stem, petal, stem1, petal1, stem2, petal2;
+
 gltfLoader.load("./model/f4.glb", function (gltf1) {
   console.log(gltf1);
   stem = gltf1.scene.children[0];
   petal = gltf1.scene.children[1];
+  // 旋转过来
   gltf1.scene.rotation.x = Math.PI;
 
   gltf1.scene.traverse((item) => {
+    // 如果材质是water，就给他一个蓝色的材质
     if (item.material && item.material.name == "Water") {
       item.material = new THREE.MeshStandardMaterial({
         color: "skyblue",
@@ -75,14 +78,18 @@ gltfLoader.load("./model/f4.glb", function (gltf1) {
         opacity: 0.5,
       });
     }
+    // 金
     if (item.material && item.material.name == "Stem") {
       stem = item;
     }
+    // 花瓣
     if (item.material && item.material.name == "Petal") {
       petal = item;
     }
   });
 
+
+  // 加载第二个状态
   gltfLoader.load("./model/f2.glb", function (gltf2) {
     gltf2.scene.traverse((item) => {
       if (item.material && item.material.name == "Stem") {
@@ -90,6 +97,7 @@ gltfLoader.load("./model/f4.glb", function (gltf1) {
         stem.geometry.morphAttributes.position = [
           stem1.geometry.attributes.position,
         ];
+        // 更新到第二个状态
         stem.updateMorphTargets();
       }
       if (item.material && item.material.name == "Petal") {
