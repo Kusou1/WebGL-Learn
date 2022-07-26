@@ -15,6 +15,7 @@
 - [three.js_firework 烟花](./12-firework)
 - [three.js_shader_material 使用着色器加工材质](./13-shader_material)
 - [three.js_effect_composer 效果合成器](./14-effect_composer/)
+- [three.js_css_render HTML混合3D渲染](./15-CSS_Render/)
   
   
 ## WebGL是什么
