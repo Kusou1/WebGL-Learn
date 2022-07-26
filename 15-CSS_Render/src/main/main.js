@@ -14,7 +14,7 @@ let moon;
 let chinaPosition;
 let chinaLabel;
 let chinaDiv;
-const raycaster = new THREE.Raycaster();
+const raycaster = new THREE.Raycaster(); // 实例化射线
 init();
 animate();
 
@@ -72,6 +72,7 @@ function init() {
   const earthDiv = document.createElement('div');
   earthDiv.className = "label";
   earthDiv.innerHTML = "地球";
+  // 创建元素标签对象
   const earthLabel = new CSS2DObject(earthDiv);
   earthLabel.position.set(0,1,0);
   earth.add(earthLabel);
@@ -85,6 +86,7 @@ function init() {
   earth.add(chinaLabel);
   console.log(chinaLabel)
 
+  // 月球
   const moonDiv = document.createElement('div');
   moonDiv.className = "label";
   moonDiv.innerHTML = "月球";
@@ -96,7 +98,7 @@ function init() {
   // 实例化css2d的渲染器
   labelRenderer = new CSS2DRenderer();
   labelRenderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(labelRenderer.domElement)
+  document.body.appendChild(labelRenderer.domElement) // 将CSS2d渲染器中的元素添加进来
   labelRenderer.domElement.style.position = 'fixed';
   labelRenderer.domElement.style.top = '0px';
   labelRenderer.domElement.style.left = '0px';
@@ -126,6 +128,7 @@ function onWindowResize() {
 
   camera.updateProjectionMatrix();
 
+  // 改变宽度时候自适应
   renderer.setSize(window.innerWidth, window.innerHeight);
   labelRenderer.setSize(window.innerWidth, window.innerHeight);
 }
@@ -138,17 +141,21 @@ function animate() {
 
   const elapsed = clock.getElapsedTime();
 
+  // 月球旋转
   moon.position.set(Math.sin(elapsed) * 5, 0, Math.cos(elapsed) * 5);
 
+  // 获取china的坐标
   const chinaPosition = chinaLabel.position.clone();
-  // 计算出标签跟摄像机的距离
+  // 计算出标签跟摄像机的距离 distanceTo方法可以获得两物的距离
   const labelDistance = chinaPosition.distanceTo(camera.position);
-  // 检测射线的碰撞
+  // 检测射线的碰撞,来检测标签显示
   // chinaLabel.position
   // 向量(坐标)从世界空间投影到相机的标准化设备坐标 (NDC) 空间。
   chinaPosition.project(camera);
+  // 使用camera到中国的射线
   raycaster.setFromCamera(chinaPosition,camera);
 
+  // 碰撞场景中的的所有物体，子元素也进行检测,返回碰撞到的物体数组
   const intersects = raycaster.intersectObjects(scene.children,true)
   // console.log(intersects)
   
@@ -159,13 +166,14 @@ function animate() {
   }else{
     // if(labelDistance)
     const minDistance = intersects[0].distance;
-    console.log(minDistance,labelDistance)
+    // console.log(minDistance,labelDistance)
+    // 判断离相机最近的物体的距离是否比距离label的距离近
+    // 比label近则不显示
     if(minDistance<labelDistance){
       chinaLabel.element.classList.remove('visible');
     }else{
       chinaLabel.element.classList.add('visible');
     }
-    
   }
   
 
