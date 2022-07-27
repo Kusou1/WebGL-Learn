@@ -4,6 +4,7 @@ import * as THREE from "three";
 const scene = new THREE.Scene();
 
 // 场景天空盒
+// 设置加载路径
 const textureCubeLoader = new THREE.CubeTextureLoader().setPath("./textures/");
 const textureCube = textureCubeLoader.load([
   "1.jpg",
@@ -14,6 +15,7 @@ const textureCube = textureCubeLoader.load([
   "6.jpg",
 ]);
 
+// 设置成场景的背景和环境
 scene.background = textureCube;
 scene.environment = textureCube;
 

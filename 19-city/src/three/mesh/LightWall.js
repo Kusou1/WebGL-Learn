@@ -10,19 +10,20 @@ export default class LightWall {
     position = { x: 0, z: 0 },
     color = 0xff0000
   ) {
+    // CylinderGeometry 圆柱几何体
     this.geometry = new THREE.CylinderBufferGeometry(
-      radius,
-      radius,
-      2,
-      32,
-      1,
-      true
+      radius, //  圆柱的顶部半径
+      radius, // 圆柱的底部半径
+      2, // 圆柱的高度
+      32, // 圆柱侧面周围的分段数
+      1, // 圆柱侧面沿着其高度的分段数
+      true // 该圆锥的底面是开放的还是封顶的
     );
     this.material = new THREE.ShaderMaterial({
       vertexShader: vertex,
       fragmentShader: fragment,
-      transparent: true,
-      side: THREE.DoubleSide,
+      transparent: true, // 透明
+      side: THREE.DoubleSide, // 两面都看得到
     });
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);

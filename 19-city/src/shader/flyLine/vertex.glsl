@@ -15,5 +15,6 @@ void main(){
     }
     vSize = (vSize-500.0)*0.1;
     
+    // 远离摄像机就越小
     gl_PointSize = -vSize/viewPosition.z;
 }

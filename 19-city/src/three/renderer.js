@@ -1,7 +1,7 @@
 import * as THREE from "three";
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer({
-  // 抗锯齿
+  // 设置抗锯齿
   antialias: true,
   // logarithmicDepthBuffer: true,
 });

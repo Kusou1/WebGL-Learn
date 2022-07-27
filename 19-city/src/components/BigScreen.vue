@@ -1,6 +1,6 @@
 <template>
     <div id="bigScreen">
-        <div class="header">3D城市</div>
+        <div class="header">广州城市管理</div>
         <div class="main">
             <div class="left">
                 <div class="cityEvent" v-for="(item, key) in props.dataInfo">
@@ -66,6 +66,7 @@ eventHub.on("spriteClick", (data) => {
     currentActive.value = data.i;
 });
 
+// 触发事件给消息总线
 const toggleEvent = (i) => {
     currentActive.value = i;
     eventHub.emit("eventToggle", i);
@@ -81,7 +82,8 @@ const toggleEvent = (i) => {
 
     left: 0;
     top: 0;
-    pointer-events: none;
+    /* 穿透事件 */
+    pointer-events: none; 
     display: flex;
     flex-direction: column;
 }

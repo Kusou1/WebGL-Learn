@@ -43,13 +43,14 @@ const changeInfo = async () => {
     dataInfo[key].unit = res.data.data[key].unit;
     gsap.to(dataInfo[key], {
       number: res.data.data[key].number,
-      duration: 1,
+      duration: 3,
     });
   }
 
   // console.log(dataInfo);
 };
 
+// 获取事件列表
 const eventList = ref([]);
 const getEventList = async () => {
   let result = await getSmartCityList();

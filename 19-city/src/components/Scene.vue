@@ -75,6 +75,7 @@ let mapFn = {
   },
 };
 
+// 使得某一个高亮
 eventHub.on("eventToggle", (i) => {
   eventListMesh.forEach((item) => {
     if (item.eventListIndex === i) {
@@ -89,6 +90,7 @@ eventHub.on("eventToggle", (i) => {
     z: props.eventList[i].position.y / 5 - 10,
   };
   //   controls.target.set(position.x, position.y, position.z);
+  // 改变控制器的方向
   gsap.to(controls.target, {
     duration: 1,
     x: position.x,
@@ -97,6 +99,7 @@ eventHub.on("eventToggle", (i) => {
   });
 });
 
+// 监听事件列表
 watch(
   () => props.eventList,
   (val) => {

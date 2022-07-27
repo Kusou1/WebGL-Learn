@@ -13,6 +13,7 @@ export default class FlyLineShader {
     ];
     // 创建曲线
     this.lineCurve = new THREE.CatmullRomCurve3(linePoints);
+    // 获取曲线上的1000个点
     const points = this.lineCurve.getPoints(1000);
     // 2/创建几何顶点
     this.geometry = new THREE.BufferGeometry().setFromPoints(points);

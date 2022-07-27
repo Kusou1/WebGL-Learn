@@ -11,6 +11,7 @@ export default class AlarmSprite {
     };
 
     const map = textureLoader.load(typeObj[type]);
+    // 精灵图
     this.material = new THREE.SpriteMaterial({
       map: map,
       color: color,
@@ -33,7 +34,9 @@ export default class AlarmSprite {
 
     // 事件的监听
     window.addEventListener("click", (event) => {
+      // 获得-1到1
       this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      // y轴方向和这个是相反的
       this.mouse.y = -((event.clientY / window.innerHeight) * 2 - 1);
 
       this.raycaster.setFromCamera(this.mouse, camera);
@@ -41,6 +44,7 @@ export default class AlarmSprite {
       event.mesh = this.mesh;
       event.alarm = this;
 
+      // 射线射到的东西，检测射线有没有碰撞this.mesh
       const intersects = this.raycaster.intersectObject(this.mesh);
       if (intersects.length > 0) {
         this.fns.forEach((fn) => {
@@ -55,6 +59,7 @@ export default class AlarmSprite {
 
   remove() {
     this.mesh.remove();
+    // 从父元素中移除
     this.mesh.removeFromParent();
     this.mesh.geometry.dispose();
     this.mesh.material.dispose();

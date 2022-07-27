@@ -11,20 +11,26 @@ import AlarmSprite from "./AlarmSprite";
 
 export default function createCity() {
   const gltfLoader = new GLTFLoader();
+  // 导入城市模型  public中
   gltfLoader.load("./model/city.glb", (gltf) => {
     // console.log(gltf);
 
+    // traverse遍历每一个元素
     gltf.scene.traverse((item) => {
       if (item.type == "Mesh") {
         console.log(item);
+        // 改材质
         const cityMaterial = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(0x0c0e33),
+          color: new THREE.Color(0x0c0e44),
         });
         item.material = cityMaterial;
+        // 修改城市材质
         modifyCityMaterial(item);
         if (item.name == "Layerbuildings") {
+          // 为建筑添加线框，传入几何体
           const meshLine = new MeshLine(item.geometry);
           const size = item.scale.x;
+          // 对线框进行缩放
           meshLine.mesh.scale.set(size, size, size);
           scene.add(meshLine.mesh);
         }
@@ -37,7 +43,7 @@ export default function createCity() {
     // scene.add(flyLine.mesh);
 
     // // 添加着色器飞线
-    // const flyLineShader = new FlyLineShader();
+    // const flyLineShader = new FlyLineShader({x:0,z:10});
     // scene.add(flyLineShader.mesh);
     // // 添加雷达
     // const lightRadar = new LightRadar();
