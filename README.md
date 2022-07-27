@@ -23,11 +23,10 @@
 - [three.js_blender 建模学习](./20-blender/)
 
 
-  
-  
+![blender](./assets/three_js/blender.jpg?raw=true)
+
 ## WebGL是什么
 WebGL（Web 图形库）是一个 JavaScript API，可在任何兼容的 Web 浏览器中渲染高性能的交互式 3D 和 2D 图形，而无需使用插件。WebGL 通过引入一个与 OpenGL ES 2.0 非常一致的 API 来做到这一点，该 API 可以在 HTML5 <canvas>元素中使用。 这种一致性使 API 可以利用用户设备提供的硬件图形加速。
-
 ## WebGL 发展史
 WebGL 的发展最早要追溯到 2006 年，WebGL 起源于 Mozilla 员工[弗拉基米尔·弗基西维奇](https://zh.wikipedia.org/wiki/%E5%BC%97%E6%8B%89%E5%9F%BA%E7%B1%B3%E7%88%BE%C2%B7%E5%BC%97%E5%9F%BA%E8%A5%BF%E7%B6%AD%E5%A5%87)的一项 Canvas 3D 实验项目，并于 2006 年首次展示了 Canvas 3D 的原型。这一技术在 2007 年底在 FireFox 和 Opera 浏览器中实现。2009 年初 Khronos Group 联盟创建了 WebGL 的工作组最初的工作成员包括 Apple、Google、Mozilla、Opera 等。 2011 年 3 月 WebGL 1.0 规范发布，WebGL 2 规范的发展始于 2013 年，并于 2017 年 1 月最终完成，WebGL 2 的规范，首度在 Firefox 51、Chrome 56 和 Opera 43 中被支持。更新一代的标准叫做[WebGPU](https://www.w3.org/TR/webgpu/)
 
@@ -35,4 +34,4 @@ WebGL 的发展最早要追溯到 2006 年，WebGL 起源于 Mozilla 员工[弗�
 ![three_2](./assets/three_js/three_2.jpg?raw=true)
 
 
-- [three.js](https://threejs.org/)
+- [three.js官方网站](https://threejs.org/)
