@@ -25,6 +25,7 @@ class CameraModule {
   add(name, camera) {
     this.collection[name] = camera;
   }
+  // 设置当前相机
   setActive(name) {
     this.activeCamera = this.collection[name];
   }

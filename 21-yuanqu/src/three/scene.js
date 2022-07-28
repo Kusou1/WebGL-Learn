@@ -22,6 +22,7 @@ const hdrLoader = new RGBELoader();
 hdrLoader.loadAsync("./textures/023.hdr").then((texture) => {
   scene.background = texture;
   scene.environment = texture;
+  // 使用圆柱体的映射
   scene.environment.mapping = THREE.EquirectangularReflectionMapping;
 });
 

@@ -12,6 +12,7 @@ class ControlsModule {
       this[`set${name}Controls`]();
     });
   }
+  // 设置控制器为轨道模式
   setOrbitControls() {
     // 初始化控制器
     this.controls = new OrbitControls(
@@ -26,6 +27,7 @@ class ControlsModule {
     this.controls.maxPolarAngle = Math.PI / 2;
     this.controls.minPolarAngle = 0;
   }
+  // 设置控制器为飞行模式
   setFlyControls() {
     this.controls = new FlyControls(
       cameraModule.activeCamera,
@@ -34,6 +36,7 @@ class ControlsModule {
     this.controls.movementSpeed = 100;
     this.controls.rollSpeed = Math.PI / 60;
   }
+  // 设置控制器为第一人称模式
   setFirstPersonControls() {
     this.controls = new FirstPersonControls(
       cameraModule.activeCamera,
@@ -41,6 +44,7 @@ class ControlsModule {
     );
     this.controls.movementSpeed = 100;
     this.controls.rollSpeed = Math.PI / 60;
+    this.controls.lookSpeed = 0.05
   }
 }
 

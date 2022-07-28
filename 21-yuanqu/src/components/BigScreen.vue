@@ -33,7 +33,7 @@
           </h1>
           <h1 @click="toggleCamera('rightcamera_Orientation')">
             <img class="icon" src="../assets/bg/bar.svg" alt="" />
-            <span>查看汽车司机视角</span>
+            <span>侧面跟随汽车视角</span>
           </h1>
 
           <div class="footerBorder"></div>
@@ -61,7 +61,7 @@
                   <span> 飞行观览 </span>
                 </div>
               </h1>
-              <p>可以使用飞行模式进行园区进行观览</p>
+              <p>可以使用飞行模式进行园区进行观览,可通过键盘wasd进行移动</p>
             </li>
             <li @click="toggleControls('FirstPerson')">
               <h1>
