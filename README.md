@@ -21,6 +21,7 @@
 - [three.js_vr-house 全景VR看房](./18-VR-House/)
 - [three.js_city 智慧城市](./19-city/)
 - [three.js_blender 建模学习](./20-blender/)
+- [three.js_blender 智慧园区](./21-yuanqu/)
 
 
 ![blender](./assets/three_js/blender.jpg?raw=true)
