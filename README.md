@@ -22,6 +22,9 @@
 - [three.js_city 智慧城市](./19-city/)
 - [three.js_blender 建模学习](./20-blender/)
 - [three.js_blender 智慧园区](./21-yuanqu/)
+- [three.js_Skeletal-animation 骨骼动画](./22-Skeletal-animation/)
+
+
 
 
 ![blender](./assets/three_js/blender.jpg?raw=true)
