@@ -4,13 +4,15 @@
 
 <script setup>
 import { onMounted } from "vue";
+// 将cesium目录下的Build/Cesium  4个目录拷贝到public目录下
+// 将cesium的widgets目录拷贝一份刀src下，将css文件引入
 import * as Cesium from "cesium";
-import "./Widgets/widgets.css";
+import "./Widgets/widgets.css"; 
 
 // 设置cesium的token
 Cesium.Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhMzNkNTE5Zi1mMjY4LTRiN2QtOTRlZC1lOTUyM2NhNDYzNWYiLCJpZCI6NTU0OTYsImlhdCI6MTYyNTAyNjMyOX0.a2PEM4hQGpeuMfeB9-rPp6_Gkm6O-02Dm4apNbv_Dlk";
-// cesium默认资源路径
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2Y0MjBjYS1kMzUzLTQ2MjAtYTFlNy1lYjg0NzFiMTllOTUiLCJpZCI6MTAzMDI2LCJpYXQiOjE2NTkxMTI1Mjh9.lhLF2WVuumLOJYjW0BHO29dGrVnO6SNveE9uqGOYugk";
+// 设置cesium默认资源路径，静态资源的路径
 window.CESIUM_BASE_URL = "/";
 // 设置默认的视角为中国
 Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(
@@ -25,20 +27,21 @@ Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(
 );
 
 onMounted(() => {
+  // 要和id名相同
   var viewer = new Cesium.Viewer("cesiumContainer", {
     // 是否显示信息窗口
     // infoBox: false,
     // 是否创建动画
     animation: false,
     // 是否显示图层选择器
-    baseLayerPicker: false,
+    baseLayerPicker: true,
     // 是否显示全屏按钮
     fullscreenButton: false,
-    // 是否显示右上角的查询按钮
-    geocoder: false,
+    // 是否显示右上角的查询按钮,可以搜索地址
+    geocoder: true,
     // 是否显示HOME按钮
     homeButton: false,
-    // 是否显示场景控制按钮
+    // 是否显示场景控制按钮,控制viewer的显示模式
     sceneModePicker: false,
     // 是否显示帮助按钮
     navigationHelpButton: false,

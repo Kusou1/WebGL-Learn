@@ -44,7 +44,7 @@ onMounted(() => {
     navigationHelpButton: false,
     // 是否显示时间轴
     timeline: false,
-    // 设置天空盒
+    // 设置天空盒,天空背景的显示方式
     skyBox: new Cesium.SkyBox({
       sources: {
         positiveX: "./texture/sky/px.jpg",
