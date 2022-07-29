@@ -1,5 +1,7 @@
 # threeapp 智慧工厂
 
+[组（Group）](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group)
+
 ## Project setup
 ```
 yarn install

@@ -57,6 +57,7 @@ export default class City {
       gltf.scene.traverse((child) => {
         if (child.isMesh) {
           // console.log(child);
+          // 调整发光的亮度
           child.material.emissiveIntensity = 5;
           // child.receiveShadow = true;
           // child.castShadow = true;
@@ -72,6 +73,7 @@ export default class City {
       this.wallGroup = gltf.scene;
     });
 
+    // 加载战斗机
     gltfLoader.load("./model/Fighter1.glb", (gltf) => {
       console.log(gltf);
 
@@ -79,10 +81,12 @@ export default class City {
 
       this.fighterGroup.visible = false;
       scene.add(this.fighterGroup);
+      // 放到二楼
       this.fighterGroup.position.set(3, 42, 68);
       this.fighterGroup.traverse((child) => {
         if (child.isMesh) {
           // console.log(child);
+          // 让飞机发光
           child.material.emissiveIntensity = 15;
           child.position2 = child.position.clone();
         }
@@ -101,7 +105,7 @@ export default class City {
         //通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera(this.mouse, cameraModule.activeCamera);
 
-        //进行检测
+        //进行检测有没有碰撞到战斗机
         const intersects = this.raycaster.intersectObject(this.fighterGroup);
         //   console.log(intersects);
         if (intersects.length > 0) {
@@ -135,7 +139,7 @@ export default class City {
   }
 
   createTag(object3d) {
-    // 创建各个区域的元素
+    // 创建各个区域的元素标签
     const element = document.createElement("div");
     element.className = "elementTag";
     element.innerHTML = `
@@ -181,6 +185,7 @@ export default class City {
   showWall() {
     this.wallGroup.visible = true;
   }
+  // 初始化事件总线
   initEvent() {
     eventHub.on("showFloor1", () => {
       this.showFloor1();
@@ -246,7 +251,7 @@ export default class City {
         if (child.isMesh) {
           // console.log(child);
           // child.position.copy(positions[n].multiplyScalar(20));
-          positions[n].multiplyScalar(10);
+          positions[n].multiplyScalar(10);// 放大十倍
 
           gsap.to(child.position, {
             x: "+=" + positions[n].x,
@@ -261,6 +266,7 @@ export default class City {
       console.log(positions);
     });
 
+    // 恢复飞机
     eventHub.on("recoverFighter", () => {
       this.fighterGroup.traverse((child) => {
         if (child.isMesh) {
