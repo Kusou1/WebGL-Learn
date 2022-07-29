@@ -26,7 +26,7 @@ Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(
 
 onMounted(() => {
   var viewer = new Cesium.Viewer("cesiumContainer", {
-    //设置地形
+    //设置地形,加载本地地形数据
     terrainProvider: new Cesium.CesiumTerrainProvider({
       url: "./terrains/gz",
     }),

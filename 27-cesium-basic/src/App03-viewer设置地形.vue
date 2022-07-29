@@ -44,7 +44,8 @@ onMounted(() => {
     // navigationHelpButton: false,
     // // 是否显示时间轴
     // timeline: false,
-    //设置地形
+
+    //设置地形，就可以看到山脉的效果了
     terrainProvider: Cesium.createWorldTerrain({
       // 添加水面的效果
       requestWaterMask: true,

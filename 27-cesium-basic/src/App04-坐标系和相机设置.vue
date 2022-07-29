@@ -46,9 +46,9 @@ onMounted(() => {
   // // 隐藏cesiumLogo
   viewer.cesiumWidget.creditContainer.style.display = "none";
 
-  //01-屏幕坐标系统
-  //02-笛卡尔空间直角坐标系
-  //03-WGS-84坐标系
+  //01-屏幕坐标系统，二维的笛卡尔坐标系，Cartesian2类型
+  //02-笛卡尔空间直角坐标系，Cartesian3类型
+  //03-地理坐标系统，WGS-84坐标系，Cartesian3类型，经度，纬度，高度来定义
   // 坐标系数据的转换空间坐标系
 
   // 如果围绕z轴旋转，翻滚角
@@ -75,19 +75,35 @@ onMounted(() => {
   //   },
   // });
 
-  // 将角度转换为弧度
-  // var rotation = Cesium.Math.toRadians(0);
-  // console.log(rotation);
-  // // setView快速切换至指定的视角，没有过程中的动画
+  
+  // setView快速切换至指定的视角，没有过程中的动画
+  // 瞬间到达指定的视角，没有过程中的动画
   // viewer.camera.setView({
+  //   设置相机前往的位置
   //   destination: position,
   //   orientation: {
+  //   指定相机的朝向
   //     heading: rotation,
-  //     // 俯仰角，垂直看向地面是-90度
+  //     // 俯仰角，0度是竖直向上，90度是竖直向下
   //     pitch: Cesium.Math.toRadians(-10),
+  //     指定相机的翻滚角，水平看向地面是0度,20度是水平看向右边的角度
   //     roll: 0.0,
   //   },
   // });
+
+  // 将角度转换为弧度 角度与弧度的转换
+  // var rotation = Cesium.Math.toRadians(0);
+  // console.log(rotation);
+  
+  // 弧度转换为角度
+  // var rotation = Cesium.Math.toDegrees(2 * Math.PI);
+
+  // 将经纬度转换为笛卡尔坐标
+  // var cartographic3 = Cesium.Cartesian3.fromDegrees(116.39, 39.9, 1000);
+
+  // 将笛卡尔坐标转换为经纬度
+  // var cartographic = Cesium.Cartographic.fromCartesian(cartographic3);
+  
 
   //设置相机环绕物体，定点浏览,没有动画的过程
   // let position = Cesium.Cartesian3.fromDegrees(116.39, 39.9, 1000);

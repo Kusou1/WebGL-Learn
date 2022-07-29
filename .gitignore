@@ -9,3 +9,5 @@
 !**/dist/assets
 !**/dist/draco
 !**/dist/model
+**/terrains/*
+!**/terrains/textures/*.zip
