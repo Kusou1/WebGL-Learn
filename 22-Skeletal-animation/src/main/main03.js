@@ -78,12 +78,12 @@ gltfLoader.load("./model/jianshen-min.glb", function (gltf) {
   action.play();
 
   // 添加平行光;
-  const light = new THREE.DirectionalLight(0xffffff, 2);
-  light.position.set(0, 100, 100);
+  const light = new THREE.DirectionalLight(0xffffff, 10);
+  light.position.set(10, 100, 100);
   scene.add(light);
   // 添加点光源
   // const pointLight = new THREE.PointLight(0xffffff, 10);
-  // pointLight.position.set(0, 100, 100);
+  // pointLight.position.set(0, 100, -100);
 });
 
 // 创建一个金属球添加到场景中
