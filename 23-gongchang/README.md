@@ -2,6 +2,9 @@
 
 [组（Group）](https://threejs.org/docs/index.html?q=Group#api/zh/objects/Group)
 
+![gongchang](../assets/three_js/gongchang.png)
+
+
 ## Project setup
 ```
 yarn install

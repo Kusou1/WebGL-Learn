@@ -24,6 +24,7 @@
 - [three.js_blender 智慧园区](./21-yuanqu/)
 - [three.js_Skeletal-animation 骨骼动画](./22-Skeletal-animation/)
 - [three.js_gongchang 智慧工厂](./23-gongchang/)
+- [three.js_light 物体发光效果](./24-light/)
 
 
 
