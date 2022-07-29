@@ -1,0 +1,22 @@
+{
+  "name": "03-three_basic",
+  "version": "1.0.0",
+  "description": "three基础知识",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.5.0"
+  },
+  "dependencies": {
+    "cannon-es": "^0.19.0",
+    "d3": "^7.4.4",
+    "dat.gui": "^0.7.7",
+    "gsap": "^3.9.1",
+    "three": "^0.137.5"
+  }
+}
