@@ -76,23 +76,23 @@ onMounted(() => {
   // });
 
   
+    // 将角度转换为弧度 角度与弧度的转换
+    var rotation = Cesium.Math.toRadians(0);
   // setView快速切换至指定的视角，没有过程中的动画
   // 瞬间到达指定的视角，没有过程中的动画
-  // viewer.camera.setView({
-  //   设置相机前往的位置
-  //   destination: position,
-  //   orientation: {
-  //   指定相机的朝向
-  //     heading: rotation,
-  //     // 俯仰角，0度是竖直向上，90度是竖直向下
-  //     pitch: Cesium.Math.toRadians(-10),
-  //     指定相机的翻滚角，水平看向地面是0度,20度是水平看向右边的角度
-  //     roll: 0.0,
-  //   },
-  // });
+  viewer.camera.setView({
+    // 设置相机前往的位置
+    destination: position,
+    orientation: {
+    // 指定相机的朝向
+      heading: rotation,
+      // 俯仰角，0度是竖直向上，90度是竖直向下
+      pitch: Cesium.Math.toRadians(-10),
+      // 指定相机的翻滚角，水平看向地面是0度,20度是水平看向右边的角度
+      roll: 0.0,
+    },
+  });
 
-  // 将角度转换为弧度 角度与弧度的转换
-  // var rotation = Cesium.Math.toRadians(0);
   // console.log(rotation);
   
   // 弧度转换为角度

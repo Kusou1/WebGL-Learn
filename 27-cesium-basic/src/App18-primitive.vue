@@ -98,6 +98,7 @@ onMounted(() => {
   //   }),
   // });
 
+  // 使用Primitive
   var primitiveRect = new Cesium.Primitive({
     geometryInstances: [instance, instance2],
     appearance: new Cesium.EllipsoidSurfaceAppearance({

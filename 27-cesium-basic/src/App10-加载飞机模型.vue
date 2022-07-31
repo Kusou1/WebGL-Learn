@@ -100,7 +100,7 @@ onMounted(() => {
     });
   }
 
-  // 创建绿色的大点作为飞机
+  // 创建飞机模型
   const airplaneEntity = viewer.entities.add({
     availability: new Cesium.TimeIntervalCollection([
       new Cesium.TimeInterval({
@@ -111,6 +111,17 @@ onMounted(() => {
     position: positionProperty,
     model: {
       uri: "./model/Air.glb",
+      // 设置飞机的最小像素
+      minimumPixelSize: 128,
+      // 设置飞机的轮廓
+      silhouetteSize: 10,
+      // 设置轮廓的颜色
+      silhouetteColor: Cesium.Color.WHITE.withAlpha(0.5),
+      // 设置相机距离飞机的距离范围
+      distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        0,
+        20000
+      ),
     },
     // 自动计算前进方向
     orientation: new Cesium.VelocityOrientationProperty(positionProperty),

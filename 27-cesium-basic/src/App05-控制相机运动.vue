@@ -100,7 +100,7 @@ onMounted(() => {
   document.addEventListener("keydown", function (e) {
     // console.log(e);
     //  获取相机离地面的高度
-    var height = viewer.camera.positionCartographic.height;
+    var height =  viewer.camera.positionCartographic.height;
     // console.log(height);
     // 设置相机移动的比例
     var moveRate = height / 100;
@@ -139,8 +139,10 @@ onMounted(() => {
       // x键向下移动相机
       viewer.camera.moveDown(moveRate);
     } else if (e.key == "g") {
+      // g键向左逆时针翻滚
       viewer.camera.twistLeft(Cesium.Math.toRadians(0.1));
     } else if (e.key == "h") {
+      // h键向右顺时针翻滚
       viewer.camera.twistRight(Cesium.Math.toRadians(0.1));
     }
   });
