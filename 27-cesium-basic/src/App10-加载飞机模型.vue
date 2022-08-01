@@ -6,6 +6,7 @@
 import { onMounted } from "vue";
 import * as Cesium from "cesium";
 import "./Widgets/widgets.css";
+// 飞机飞行数据
 import flightData from "@/assets/json/plane.json";
 // console.log(flightData);
 
@@ -48,12 +49,13 @@ onMounted(() => {
   // Cesium全球3.5亿做建筑物，数据来源openStreetMap地图
   var buildings = viewer.scene.primitives.add(new Cesium.createOsmBuildings());
 
-  // 设置样本属性，将轨迹点添加至样本属性
+  // 设置样本属性，将轨迹点添加至样本属性SampledPositionProperty
   // JulianDate儒略日，天文学家专门用于计算时间的一种数学表示方法
   // 起点时间是在公元前4713年1月1日，终点时间是在公元前4713年1月1日，时间间隔是1秒
   const positionProperty = new Cesium.SampledPositionProperty();
   // 时间的间隔
   const timeStepInSeconds = 30;
+  // 整个飞行花费的时间
   const totalSeconds = (flightData.length - 1) * timeStepInSeconds;
   // 设置起点时间
   const time = new Date("2020-03-09T23:10:00Z");
@@ -69,7 +71,7 @@ onMounted(() => {
   viewer.clock.startTime = start.clone();
   viewer.clock.stopTime = stop.clone();
   viewer.clock.currentTime = start.clone();
-  // 设置进度条，从哪里开始到哪里结束
+  // 设置进度条，从哪里开始到哪里结束,控制当前时间
   viewer.timeline.zoomTo(start, stop);
 
   for (let i = 0; i < flightData.length; i++) {
@@ -124,6 +126,7 @@ onMounted(() => {
       ),
     },
     // 自动计算前进方向
+    // VelocityOrientationProperty会自动根据采样点，计算出飞机的速度和方向
     orientation: new Cesium.VelocityOrientationProperty(positionProperty),
     // 绘制轨迹线
     path: new Cesium.PathGraphics({

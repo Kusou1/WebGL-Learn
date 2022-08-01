@@ -1,5 +1,5 @@
 <template>
-  <div id="cesiumContainer" ref="cesiumContainer"></div>
+    <div id="cesiumContainer" ref="cesiumContainer"></div>
 </template>
 
 <script setup>
@@ -43,6 +43,29 @@ onMounted(() => {
   // // 隐藏cesiumLogo
   viewer.cesiumWidget.creditContainer.style.display = "none";
 
+
+  // 棋盘纹理
+  // let material = new Cesium.CheckerboardMaterialProperty({
+  //       evenColor: Cesium.Color.WHITE.withAlpha(0.5),
+  //       oddColor: Cesium.Color.BLACK.withAlpha(0.5),
+  //       repeat: new Cesium.Cartesian2(10, 10),
+  // })
+
+  // 条纹纹理
+  // let material = new Cesium.StripeMaterialProperty({
+  //   evenColor: Cesium.Color.WHITE.withAlpha(0.5),
+  //   oddColor: Cesium.Color.BLACK.withAlpha(0.5),
+  //   repeat: 32
+  // })
+
+  // 网格纹理
+  let material = new Cesium.GridMaterialProperty({
+    color: Cesium.Color.WHITE.withAlpha(0.5),
+    cellAlpha: 0.5,
+    lineCount: new Cesium.Cartesian2(10, 10),
+    lineThickness: new Cesium.Cartesian2(1, 1),
+  })
+
   // entity
   var entity = viewer.entities.add({
     rectangle: {
@@ -56,7 +79,7 @@ onMounted(() => {
         // 北边维度
         40
       ),
-      material: Cesium.Color.RED.withAlpha(0.5),
+      material: material
     },
   });
 
@@ -142,11 +165,11 @@ onMounted(() => {
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 #cesiumContainer {
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 }
 </style>

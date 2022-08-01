@@ -1,5 +1,7 @@
 # cesiumapp
 
+![china](../assets/three_js/cesium-china.png)
+
 ## Project setup
 ```
 yarn install

@@ -121,8 +121,9 @@ onMounted(() => {
   //     width: 10,
   //     // 飞线效果
   //     material: new Cesium.PolylineGlowMaterialProperty({
+  //       // 设置发光程度 
   //       glowPower: 0.5,
-  //       // 设置锥型的比例
+  //       // 设置尾椎缩小程度
   //       taperPower: 0.5,
   //       color: Cesium.Color.RED,
   //     }),
@@ -139,7 +140,7 @@ onMounted(() => {
   //       39.88, 100,
   //     ]),
   //     width: 5,
-  //     // 飞线效果
+  //     // 虚线材质设置
   //     material: new Cesium.PolylineDashMaterialProperty({
   //       dashLength: 20,
   //       color: Cesium.Color.RED,
@@ -173,7 +174,8 @@ onMounted(() => {
         116.39, 39.9, 100, 116.38, 39.85, 100, 116.41, 39.86, 100, 116.41,
         39.88, 100,
       ]),
-      width: 10,
+      
+      width: 20,
       // 飞线效果
       material: new Cesium.PolylineOutlineMaterialProperty({
         color: Cesium.Color.RED,

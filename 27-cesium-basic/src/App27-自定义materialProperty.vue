@@ -50,6 +50,7 @@ onMounted(() => {
   //   lineThickness: new Cesium.Cartesian2(4.0, 4.0),
   // });
 
+  // 自定义Material
   class CustcomMaterialProperty {
     constructor(options) {
       this.init(options);
@@ -57,7 +58,7 @@ onMounted(() => {
     }
 
     getType() {
-      // 返回类型
+      // 返回材质类型
       return "CustcomMaterial";
     }
     getValue(time, result) {

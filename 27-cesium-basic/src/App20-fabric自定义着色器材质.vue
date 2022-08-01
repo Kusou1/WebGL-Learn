@@ -61,12 +61,15 @@ onMounted(() => {
     id: "挤出四边形",
   });
 
+  // 编写着色器修改材质
   const material = new Cesium.Material({
+    // fabric自定义着色器材质
     fabric: {
       // type: "Color",
       // uniforms: {
       //   color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
       // },
+      // source函数，返回着色器代码，决定最终显示什么内容
       source: `
       czm_material czm_getMaterial(czm_materialInput materialInput)
       {
@@ -87,6 +90,7 @@ onMounted(() => {
   //   // closed: true,
   // });
 
+  // st就是uv的坐标
   const appearance = new Cesium.MaterialAppearance({
     fragmentShaderSource: `
     varying vec3 v_positionEC;
