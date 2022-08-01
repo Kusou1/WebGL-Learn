@@ -145,6 +145,9 @@ onMounted(() => {
   setTimeout(() => {
     viewer.clock.shouldAnimate = true;
   }, 5000);
+
+  // 性能监控
+  viewer.extend(Cesium.viewerCesium3DTilesInspectorMixin);
 });
 </script>
 
