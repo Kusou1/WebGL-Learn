@@ -134,7 +134,7 @@ onMounted(() => {
     }),
   });
 
-  // 设置相机追踪运动物体
+  // 设置相机追踪运动物体,跟踪飞机
   viewer.trackedEntity = airplaneEntity;
 
   // 设置时间速率
