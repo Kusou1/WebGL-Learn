@@ -45,6 +45,7 @@ export function goFlyDestination(viewer) {
   });
 }
 
+// 添加光锥
 export function addConeModel(viewer, modelUrl) {
   let params = {
     height: 400,
@@ -150,16 +151,19 @@ export function addFlightLine(viewer, data) {
   });
 }
 
+// 道路汽车行驶轨迹线效果
 export function addRoadLine(viewer, data) {
   // 线特效的参数获取
   let setupParams = JSON.parse(data.setup_param);
   let url = data.geojsonfile;
+  // 加载geojson文件
   let promise = Cesium.GeoJsonDataSource.load(url);
   promise.then(function (dataSource) {
     viewer.dataSources.add(dataSource);
     console.log(dataSource);
     let entities = dataSource.entities.values;
     console.log(entities);
+    // 行驶轨迹线shader
     let material = new SpriteLineMaterialProperty();
     console.log(material);
     entities.forEach((item) => {

@@ -37,6 +37,7 @@ SpriteLineMaterialProperty.prototype.equals = function (t) {
 };
 
 Cesium.Material.SpriteLineMaterialType = "SpriteLine";
+// 通过图形纹理采样设置纹理
 Cesium.Material._materialCache.addMaterial("SpriteLine", {
   fabric: {
     type: "SpriteLine",
@@ -51,8 +52,11 @@ Cesium.Material._materialCache.addMaterial("SpriteLine", {
     },
     source: `
           czm_material czm_getMaterial(czm_materialInput materialInput){
+            // 生成默认的基础材质
             czm_material material = czm_getDefaultMaterial(materialInput);
+            // 获取st
             vec2 st = materialInput.st; //st.x: 0~1, st.y: 0~1
+            // 根据uv采样颜色
             vec4 colorImage = texture2D(image, vec2(fract(st.s+time), st.t));
             material.alpha = colorImage.a;
             material.diffuse = colorImage.rgb * 1.5;
