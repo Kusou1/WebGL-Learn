@@ -28,6 +28,9 @@
 - [three.js_3D-map 地理数据生成3D物体与地图](./25-3D-map/)
 - [three.js_big-screen 大屏幕数据可视化 ](./26-big-screen/)
 - [csium 基础](./27-cesium-basic/)
+- [cesium-three cesium配合three.js使用](./28-cesium-three/)
+- [cesium项目 深圳南山](./29-cesium-project/)
+- [宝马4s汽车展示与选配](./30-BWM4s/)
 
 
 
