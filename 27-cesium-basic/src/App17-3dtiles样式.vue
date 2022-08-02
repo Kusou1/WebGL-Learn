@@ -65,7 +65,9 @@ onMounted(() => {
   let params = {
     heightColor: function () {
       tiles3d.style = new Cesium.Cesium3DTileStyle({
+        // 颜色设置，颜色名称/16进制颜色值/rgba颜色值
         color: {
+          // 条件判断
           conditions: [
             ["${feature['cesium#estimatedHeight']} > 300", "color('#0000CD')"],
             ["${feature['cesium#estimatedHeight']} > 200", "color('#4169E1')"],
