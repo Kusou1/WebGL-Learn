@@ -1,5 +1,5 @@
 import * as Cesium from "cesium";
-import * as turf from "@turf/turf";
+import * as turf from "@turf/turf"; // 生成地理信息数据
 import gsap from "gsap";
 import { PolylineTrailMaterialProperty } from "./material/PolylineTrailMaterialProperty";
 import { SpriteLineMaterialProperty } from "./material/SpriteLineMaterialProperty";
@@ -45,14 +45,16 @@ export function goFlyDestination(viewer) {
   });
 }
 
-export function addModel(viewer, modelUrl) {
+export function addConeModel(viewer, modelUrl) {
   let params = {
     height: 400,
     degress: 0,
   };
-  // 添加光锥模型
+  // 设置模型的位置矩阵
   let modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
+    // 设置模型的位置
     Cesium.Cartesian3.fromDegrees(113.93, 22.53, params.height),
+    // 设置模型的旋转情况
     new Cesium.HeadingPitchRoll(
       Cesium.Math.toRadians(params.degress),
       Cesium.Math.toRadians(0),
@@ -60,13 +62,14 @@ export function addModel(viewer, modelUrl) {
     )
   );
   console.log(modelMatrix);
+  // 添加光锥模型
   let model = viewer.scene.primitives.add(
     Cesium.Model.fromGltf({
       url: "./assets/model/pyramid.glb",
       show: true, // default
       modelMatrix: modelMatrix, 
-      scale: 200.0, // double size
-      minimumPixelSize: 12, // never smaller than 128 pixels
+      scale: 200.0, // double size设置模型缩放比例
+      minimumPixelSize: 12, // never smaller than 128 pixels最小的比例
       maximumScale: 20000, // never larger than 20000 * model size (overrides minimumPixelSize)
       allowPicking: false, // not pickable
       debugShowBoundingVolume: false, // default
@@ -75,6 +78,7 @@ export function addModel(viewer, modelUrl) {
       colorBlendMode: Cesium.ColorBlendMode.MIX,
     })
   );
+  // 光锥运动
   gsap.to(params, {
     height: 600,
     degress: 180,
@@ -96,9 +100,11 @@ export function addModel(viewer, modelUrl) {
   console.log(model);
 }
 
+// 上升飞线效果
 export function addFlightLine(viewer, data) {
   // 线特效的参数获取
   let setupParams = JSON.parse(data.setup_param);
+  // 获取区域的经纬度
   let bbox = [
     setupParams.startPoint_lng,
     setupParams.startPoint_lat,
@@ -113,20 +119,26 @@ export function addFlightLine(viewer, data) {
   let gradient = setupParams.gradient;
   let random = setupParams.random;
 
+  // turf生成随机点
   let points = turf.randomPoint(random, {
     bbox: bbox,
   });
   // console.log(points);
+  // 通过生成的随机点生成线特效
   let features = points.features;
   features.forEach((item) => {
+    // 获取点的经纬度
     let point = item.geometry.coordinates;
+    // 根据点设置起始位置
     let startPosition = Cesium.Cartesian3.fromDegrees(point[0], point[1], 0);
+    // 根据点设置结束位置
     let endPosition = Cesium.Cartesian3.fromDegrees(
       point[0],
       point[1],
       height * 2 * Math.random()
     );
 
+    // 创建线
     let flyLine = viewer.entities.add({
       polyline: {
         positions: [startPosition, endPosition],

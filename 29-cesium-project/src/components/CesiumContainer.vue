@@ -70,7 +70,8 @@ onMounted(async () => {
     // enableZoomControls: false,
     // // 是否启用指南针外环
     // enableCompassOuterRing: false,
-    // enableDistanceLegend: true,
+    // 是否启用距离的图例
+    enableDistanceLegend: true,
   };
   // 设置导航罗盘
   var navigation = new CesiumNavigation(viewer, options);
@@ -101,8 +102,8 @@ onMounted(async () => {
   // var buildings = viewer.scene.primitives.add(tiles3d);
   uitlsBuild.setBuilding(viewer);
 
-  // 添加模型
-  utils.addModel(viewer);
+  // 添加光锥模型
+  utils.addConeModel(viewer);
 
   // 加载飞线特效的服务器数据
   let result = await axios.get("./api/getLinesEffectList.json");

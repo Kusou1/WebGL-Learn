@@ -1,4 +1,5 @@
 import * as Cesium from "cesium";
+// 自定义飞线材质
 function PolylineTrailMaterialProperty() {
   this._definitionChanged = new Cesium.Event();
   // console.log("PolylineTrailMaterialProperty");
@@ -16,6 +17,7 @@ PolylineTrailMaterialProperty.prototype.getType = function (time) {
 PolylineTrailMaterialProperty.prototype.getValue = function (time, result) {
   return {};
 };
+// 判断两个材质是否相等
 PolylineTrailMaterialProperty.prototype.equals = function (t) {
   return (
     this === t ||
@@ -45,13 +47,18 @@ Cesium.Material._materialCache.addMaterial("PolylineTrail", {
     },
     source: `
         czm_material czm_getMaterial(czm_materialInput materialInput){
+          // 生成默认的基础材质
           czm_material material = czm_getDefaultMaterial(materialInput);
+          // 获取st
           vec2 st = materialInput.st; //st.x: 0~1, st.y: 0~1
           // fract(1.3) == 0.3,fract是保留小数点后面的数字
           // czm_frameNumber 是当前帧数的索引号
+          // 获取当前帧数，10秒内从0-1的变化
           float t = fract(czm_frameNumber * speed / 1000.0);
+          // 加上百分比
           t *= (1.0 + percent);
-          // smoothstep(edge0, edge1, value)
+          // 平滑过度函数
+          // smoothstep(edge0, edge1, value) 
           // 假设edge0=0.0, edge1=1.0, value=0.5
           // 当value<edge0时，返回0.0
           // 当value>edge1时，返回1.0
